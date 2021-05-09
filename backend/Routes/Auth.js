@@ -16,7 +16,7 @@ const login = async (req, res) => {
     bcrypt.compare(password, user.password, (err, result) => {
       if (result) {
         const token = jsonwebtoken.sign(
-          {login},
+          {login: login},
           "secret-key",
           {expiresIn: 60 * 60 * 24 * 30}
         )
