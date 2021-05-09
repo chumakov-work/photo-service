@@ -18,14 +18,19 @@ export const loginAction = userData => async dispatch => {
     const token = res.data.data.token
 
     cookies.set('token', token)
-    dispatch({type: LOGIN_USER})
+
+    Api.user.getCurrentUser().then(res => {
+      const payload = res.data
+      dispatch({type: LOGIN_USER, payload})
+      history.push('/me')
+    })
   })
 }
 
 export const logoutAction = () => async dispatch => {
   cookies.remove('token')
-  dispatch({type: LOGOUT_USER})
   history.push('/login')
+  dispatch({type: LOGOUT_USER})
 }
 
 export const isLoggedIn = () => async dispatch => {
@@ -36,8 +41,8 @@ export const isLoggedIn = () => async dispatch => {
     return
   }
 
-  dispatch({type: LOGIN_USER})
+  Api.user.getCurrentUser().then(res => {
+    const payload = res.data
+    dispatch({type: LOGIN_USER, payload})
+  })
 }
-
-
-//

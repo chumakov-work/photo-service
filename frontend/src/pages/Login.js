@@ -16,7 +16,7 @@ const Login = props => {
     })
   }
 
-  if (props.loggedIn) history.push('/')
+  if (props.loggedIn) history.push('/me')
   return (
     <main>
       <form>

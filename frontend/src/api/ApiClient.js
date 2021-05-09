@@ -1,19 +1,20 @@
 import axios from 'axios'
 import {toast} from 'react-toastify'
-import history from './../components/common/HistoryComponent'
-
 import Cookies from "universal-cookie"
+import history from './../components/common/HistoryComponent'
+import {BACKEND_ADDR} from "../Config";
+
 const cookies = new Cookies()
 
 // Axios presets
-axios.defaults.baseURL = 'http://localhost:5000'
+axios.defaults.baseURL = BACKEND_ADDR
 axios.interceptors.response.use(null, err => {
-  if (err.response.status === 498) {
+  if (err.response && err.response.status === 498) {
     history.push('/login')
     return
   }
 
-  if (err.response.data.error) {
+  if (err.response && err.response.data.error) {
     toast.error(err.response.data.message)
   }
 })
@@ -39,9 +40,29 @@ const login = userData => {
   return axios.post('/login', userData)
 }
 
+const getCurrentUser = () => {
+  return axios.get('/me')
+}
+
+const uploadImage = image => {
+  return axios.post('/post-image', image, {
+    headers: {'Content-Type': 'multipart/form-data; boundary=photo-service'},
+  })
+}
+
+const createPost = post => {
+  return axios.post('/post', post)
+}
+
 // eslint-disable-next-line
 export default {
   auth: {
     signup, login
+  },
+  user: {
+    getCurrentUser
+  },
+  post: {
+    uploadImage, createPost
   }
 }

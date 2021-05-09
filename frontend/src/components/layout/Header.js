@@ -1,16 +1,23 @@
 import React from 'react'
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 
-const Header = () => {
+const Header = props => {
   return (
     <header>
       <Link className="logotype" to="/">Logotype</Link>
 
       <h4>Интересные места в городе</h4>
 
-      <Link to="/login">Войти</Link>
+      {props.loggedIn ? <Link to="/me">Профиль</Link> : <Link to="/login">Войти</Link>}
     </header>
   )
 }
 
-export default Header
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.user.loggedIn
+  }
+}
+
+export default connect(mapStateToProps, null)(Header)
