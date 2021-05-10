@@ -54,6 +54,10 @@ const createPost = post => {
   return axios.post('/post', post)
 }
 
+const getAllPosts = () => {
+  return axios.get('/posts')
+}
+
 // eslint-disable-next-line
 export default {
   auth: {
@@ -63,6 +67,6 @@ export default {
     getCurrentUser
   },
   post: {
-    uploadImage, createPost
+    uploadImage, createPost, getAllPosts
   }
 }
