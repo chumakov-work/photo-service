@@ -29,7 +29,9 @@ app.get('/posts', postRoutes.getNewPosts)
 app.get('/post/image/:path', postRoutes.getPostImage)
 app.post('/post-image', verification, (req, res) => postRoutes.uploadPostImage(req, res, upload))
 app.post('/post', verification, postRoutes.newPost)
-app.get('/post/:id', postRoutes.getPost)
+app.get('/post/:id', verification, postRoutes.getPost)
+app.get('/like/:id', verification, postRoutes.likePost)
+app.get('/dislike/:id', verification, postRoutes.dislikePost)
 
 // Starting a server
 const port = 5000

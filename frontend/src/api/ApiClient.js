@@ -9,6 +9,11 @@ const cookies = new Cookies()
 // Axios presets
 axios.defaults.baseURL = BACKEND_ADDR
 axios.interceptors.response.use(null, err => {
+  if (err.response && err.response.data.error && JSON.stringify(err.response.data.message) === '{}') {
+    toast.error("Непредвиденная ошибка")
+    return
+  }
+
   if (err.response && err.response.status === 498) {
     history.push('/login')
     return
@@ -58,6 +63,10 @@ const getAllPosts = () => {
   return axios.get('/posts')
 }
 
+const likePost = id => {
+  return axios.get(`/like/${id}`)
+}
+
 // eslint-disable-next-line
 export default {
   auth: {
@@ -67,6 +76,6 @@ export default {
     getCurrentUser
   },
   post: {
-    uploadImage, createPost, getAllPosts
+    uploadImage, createPost, getAllPosts, likePost
   }
 }

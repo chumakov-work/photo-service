@@ -1,6 +1,6 @@
 import Api from './../../api/ApiClient'
 import {BACKEND_ADDR} from "../../Config";
-import {LOAD_POSTS} from "../types";
+import {LIKE_POST, LOAD_POSTS} from "../types";
 
 export const newPostAction = (description, image, coords) => async dispatch => {
   await Api.post.uploadImage(image).then(res => {
@@ -12,6 +12,23 @@ export const newPostAction = (description, image, coords) => async dispatch => {
     }).then(result => {
       console.log(result)
     })
+  })
+}
+
+export const likePost = (posts, id) => async dispatch => {
+  await Api.post.likePost(id).then(res => {
+    const likedPost = res.data.post
+    const likedPosts = []
+
+    posts.forEach(post => {
+      if (post._id === id) {
+        likedPosts.push(likedPost)
+      } else {
+        likedPosts.push(post)
+      }
+    })
+
+    dispatch({type: LIKE_POST, payload: likedPosts})
   })
 }
 

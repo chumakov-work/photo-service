@@ -23,8 +23,7 @@ const getPostImage = async (req, res) => {
 
 // POSTS
 const newPost = async (req, res) => {
-  const token = req.headers.authorization.split(' ')[1]
-  const post = {...req.body, author: getCurrentUser(token)}
+  const post = {...req.body, author: getCurrentUser(req.headers.authorization.split(' ')[1])}
 
   await PostModel.create(post, (err, data) => {
     return err ? res.status(400).json({error: true, err}) : res.status(201).json(data)
@@ -44,10 +43,41 @@ const getPost = async (req, res) => {
 const getNewPosts = async (req, res) => {
   await PostModel.find()
     .sort({createdAt: -1})
-    .then(result => res.json(result))
     .catch(err => res.status(500).json({error: true, message: err}))
+    .then(result => res.json(result))
+}
+
+const likePost = async (req, res) => {
+  const id = req.params.id
+  const login = getCurrentUser(req.headers.authorization.split(' ')[1])
+
+  const likes = await PostModel.findById(id).then(post => {
+    if (post.likedBy) {
+      const filtering = post.likedBy.filter(user => user === login)
+      if (filtering.length > 0) return false
+      post.likedBy.push(login)
+    }
+
+    return {
+      post,
+      likes: post.likes + 1,
+      likedBy: post.likedBy
+    }
+  })
+
+  await PostModel
+    .updateMany({_id: id}, {$set: {likes: likes.likes, likedBy: likes.likedBy}})
+    .then(() => {
+      res.status(200).json({error: false, message: "Успешно", post: {...likes.post._doc, likes: likes.likes}})
+    })
+}
+
+const dislikePost = async (req, res) => {
+  const id = req.params.id
+
+  res.send(id)
 }
 
 module.exports = {
-  uploadPostImage, newPost, getPostImage, getPost, getNewPosts
+  uploadPostImage, newPost, getPostImage, getPost, getNewPosts, likePost, dislikePost
 }

@@ -1,12 +1,10 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {connect} from "react-redux"
 import {getAllPostsAction} from "../redux/actions"
 import Post from "../components/layout/Post"
 
 const HomePage = (props) => {
-  useEffect(() => {
-    if (!props.posts) props.getAllPostsAction()
-  })
+  if (!props.posts) props.getAllPostsAction()
 
   return (
     <main id="main-page">

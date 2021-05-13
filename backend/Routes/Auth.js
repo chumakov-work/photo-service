@@ -51,7 +51,7 @@ const signup = async (req, res) => {
   }
 
   await UserModel.create(user, (err, data) => {
-    return err ? res.status(400).json(err) : res.status(201).json(data)
+    return err ? res.status(400).json(err) : res.status(201).json({error: false, data})
   })
 }
 
