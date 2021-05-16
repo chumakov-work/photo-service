@@ -1,5 +1,5 @@
 import Api from './../../api/ApiClient'
-import {BACKEND_ADDR} from "../../Config";
+import {BACKEND_ADDR} from "../../Config"
 import {LIKE_POST, LOAD_POSTS, LOAD_UNVERIFIED_POSTS, DELETE_POST, VERIFY_POST} from "../types";
 
 export const newPostAction = (description, image, coords) => async dispatch => {

@@ -25,3 +25,5 @@ export const unverifiedPostsReducers = (state = null, action) => {
       return state
   }
 }
+
+export default postReducer

@@ -23,7 +23,6 @@ const Post = props => {
     props.deletePost(props.unverifiedPosts, props.post._id)
   }
 
-
   return (
     <div  style={{marginBottom: '25px'}}>
       <h5>Автор {props.post.author}</h5>
