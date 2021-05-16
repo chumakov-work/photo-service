@@ -7,23 +7,41 @@ import Cookies from "universal-cookie"
 const cookies = new Cookies()
 
 export const signupAction = userData => async dispatch => {
-  await Api.auth.signup(userData).then(res => {
-    toast.success('Пользователь успешно создан')
-    // loginAction(userData)
+  const signuped = await Api.auth.signup(userData).then(res => {
+    if (res) {
+      toast.success('Пользователь успешно создан')
+      return true
+    }
   })
+
+  if (signuped) {
+    await Api.auth.login(userData).then(res => {
+      if (res) {
+        const token = res.data.data.token
+        cookies.set('token', token)
+
+        Api.user.getCurrentUser().then(res => {
+          const payload = res.data
+          dispatch({type: LOGIN_USER, payload})
+          history.push('/me')
+        })
+      }
+    })
+  }
 }
 
 export const loginAction = userData => async dispatch => {
   await Api.auth.login(userData).then(res => {
-    const token = res.data.data.token
+    if (res) {
+      const token = res.data.data.token
+      cookies.set('token', token)
 
-    cookies.set('token', token)
-
-    Api.user.getCurrentUser().then(res => {
-      const payload = res.data
-      dispatch({type: LOGIN_USER, payload})
-      history.push('/me')
-    })
+      Api.user.getCurrentUser().then(res => {
+        const payload = res.data
+        dispatch({type: LOGIN_USER, payload})
+        history.push('/me')
+      })
+    }
   })
 }
 
@@ -42,7 +60,9 @@ export const isLoggedIn = () => async dispatch => {
   }
 
   Api.user.getCurrentUser().then(res => {
-    const payload = res.data
-    dispatch({type: LOGIN_USER, payload})
+    if (res) {
+      const payload = res.data
+      dispatch({type: LOGIN_USER, payload})
+    }
   })
 }

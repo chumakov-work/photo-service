@@ -2,9 +2,11 @@ const mongoose = require('mongoose')
 
 const PostSchema = new mongoose.Schema({
   author: {type: String, required: true},
-  description: {type: String, required: false},
+  description: {type: String, default: null},
   imagePath: {type: String, required: true},
-  location: {type: Object, required: false}
+  location: {type: Object, default: null},
+  likes: {type: Number, required: true, default: 0},
+  likedBy: {type: Array, default: []}
 }, {timestamps: true})
 
 module.exports = mongoose.model('Post', PostSchema)

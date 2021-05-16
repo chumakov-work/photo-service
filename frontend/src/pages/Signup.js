@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {signupAction} from "../redux/actions/authAction";
+import {signupAction} from "../redux/actions";
 import history from "../components/common/HistoryComponent";
 
 const Signup = props => {
