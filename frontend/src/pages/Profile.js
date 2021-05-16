@@ -5,6 +5,7 @@ import {toast} from "react-toastify"
 import SearchLocationComponent from "../components/common/SearchLocationComponent"
 
 import {logoutAction, newPostAction} from "../redux/actions"
+import Post from './../components/layout/Post'
 
 const Profile = props => {
   const [description, changeDescription] = useState("")
@@ -47,8 +48,13 @@ const Profile = props => {
           coords={coords}
           changeCoords={changeCoords.bind(this)}/>
 
-        <input type="submit" value="create post"/>
+        <input type="submit" value="Создать пост"/>
       </form>
+
+      <div style={{margin: "25px"}}>
+        <p>Понравившиеся</p>
+        {props.user.liked && props.user.liked.map(post => <Post post={post} fromProfile={true}/>)}
+      </div>
     </main>
   )
 }
