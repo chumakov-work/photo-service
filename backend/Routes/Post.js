@@ -42,7 +42,7 @@ const getPost = async (req, res) => {
 }
 
 const getNewPosts = async (req, res) => {
-  await PostModel.find()
+  await PostModel.find({moderated: true})
     .sort({createdAt: -1})
     .catch(err => res.status(500).json({error: true, message: err}))
     .then(result => res.json(result))
@@ -81,12 +81,33 @@ const likePost = async (req, res) => {
   }
 }
 
-const dislikePost = async (req, res) => {
+const unverifiedPosts = async (req, res) => {
+  await PostModel.find({moderated: false})
+    .sort({createdAt: 1})
+    .catch(err => res.status(500).json({error: true, message: err}))
+    .then(result => res.json(result))
+}
+
+const verifyPost = async (req, res) => {
   const id = req.params.id
 
-  res.send(id)
+  if (id) {
+    await PostModel.updateMany({_id: id}, {$set: {moderated: true}}).then(result => res.json({message: "Пост промодерирован"}))
+  } else {
+    res.status(400).json({error: true, message: "Неверный id поста"})
+  }
+}
+
+const deletePost = async (req, res) => {
+  const id = req.params.id
+
+  if (id) {
+    await PostModel.findOneAndDelete({_id: id}).then(result => result && res.json({message: "Удалено!"}))
+  } else {
+    res.status(400).json({error: true, message: "Неверный id поста"})
+  }
 }
 
 module.exports = {
-  uploadPostImage, newPost, getPostImage, getPost, getNewPosts, likePost, dislikePost
+  uploadPostImage, newPost, getPostImage, getPost, getNewPosts, likePost, unverifiedPosts, verifyPost, deletePost
 }

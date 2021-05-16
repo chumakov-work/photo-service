@@ -4,3 +4,6 @@ export const SET_USER_LOCATION = "SET_USER_LOCATION"
 
 export const LOAD_POSTS = "LOAD_POSTS"
 export const LIKE_POST = "LIKE_POST"
+export const LOAD_UNVERIFIED_POSTS = "LOAD_UNVERIFIED_POSTS"
+export const VERIFY_POST = "VERIFY_POST"
+export const DELETE_POST = "DELETE_POST"

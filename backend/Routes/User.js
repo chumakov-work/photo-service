@@ -16,6 +16,18 @@ const getCurrentUser = async (req, res) => {
   }
 }
 
+const changeUserRoleOnAdmin = async (req, res) => {
+  if (req.headers && req.headers.authorization) {
+    const token = req.headers.authorization.split(' ')[1]
+    const login = jsonwebtoken.verify(token, "secret-key").login
+
+    await UserModel.updateMany({login}, {$set: {isAdmin: true}}).then(result => res.json({message: "New role is admin!"}))
+  } else {
+    res.status(498).json({error: true, message: "Токен не найден"})
+    return {error: true, message: "Токен не найден"}
+  }
+}
+
 module.exports = {
-  getCurrentUser
+  getCurrentUser, changeUserRoleOnAdmin
 }
