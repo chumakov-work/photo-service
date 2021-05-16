@@ -21,17 +21,20 @@ const authRoutes = require('./Routes/Auth')
 app.post('/login', authRoutes.login)
 app.post('/signup', authRoutes.signup)
 
-const userRouters = require('./Routes/User')
-app.get('/me', verification, userRouters.getCurrentUser)
+const userRoutes = require('./Routes/User')
+app.get('/me', verification, userRoutes.getCurrentUser)
+app.get('/make-me-admin', verification, userRoutes.changeUserRoleOnAdmin)
 
 const postRoutes = require('./Routes/Post')
 app.get('/posts', postRoutes.getNewPosts)
+app.get('/posts/unverified', verification, postRoutes.unverifiedPosts)
 app.get('/post/image/:path', postRoutes.getPostImage)
 app.post('/post-image', verification, (req, res) => postRoutes.uploadPostImage(req, res, upload))
 app.post('/post', verification, postRoutes.newPost)
 app.get('/post/:id', verification, postRoutes.getPost)
+app.delete('/post/:id', verification, postRoutes.deletePost)
+app.get('/post/verify/:id', verification, postRoutes.verifyPost)
 app.get('/like/:id', verification, postRoutes.likePost)
-app.get('/dislike/:id', verification, postRoutes.dislikePost)
 
 // Starting a server
 const port = 5000

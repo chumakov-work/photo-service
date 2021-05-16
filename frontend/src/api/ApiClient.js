@@ -67,6 +67,18 @@ const likePost = id => {
   return axios.get(`/like/${id}`)
 }
 
+const getPostsOnVerification = () => {
+  return axios.get('/posts/unverified')
+}
+
+const verifyPost = id => {
+  return axios.get(`/post/verify/${id}`)
+}
+
+const deletePost = id => {
+  return axios.delete(`/post/${id}`)
+}
+
 // eslint-disable-next-line
 export default {
   auth: {
@@ -76,6 +88,6 @@ export default {
     getCurrentUser
   },
   post: {
-    uploadImage, createPost, getAllPosts, likePost
+    uploadImage, createPost, getAllPosts, likePost, getPostsOnVerification, verifyPost, deletePost
   }
 }

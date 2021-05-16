@@ -1,6 +1,6 @@
 import Api from './../../api/ApiClient'
-import {BACKEND_ADDR} from "../../Config";
-import {LIKE_POST, LOAD_POSTS} from "../types";
+import {BACKEND_ADDR} from "../../Config"
+import {LIKE_POST, LOAD_POSTS, LOAD_UNVERIFIED_POSTS, DELETE_POST, VERIFY_POST} from "../types";
 
 export const newPostAction = (description, image, coords) => async dispatch => {
   await Api.post.uploadImage(image).then(res => {
@@ -36,8 +36,32 @@ export const likePost = (posts, id) => async dispatch => {
   })
 }
 
-export const getAllPostsAction = () => async dispatch => {
+export const getVerifiedPosts = () => async dispatch => {
   await Api.post.getAllPosts().then(res => {
     if (res) dispatch({type: LOAD_POSTS, payload: res.data})
+  })
+}
+
+export const getUnverifiedPosts = () => async dispatch => {
+  await Api.post.getPostsOnVerification().then(res => {
+    if (res) dispatch({type: LOAD_UNVERIFIED_POSTS, payload: res.data})
+  })
+}
+
+export const verifyPost = (posts, id) => async dispatch => {
+  await Api.post.verifyPost(id).then(res => {
+    if (res) {
+      const updatedPosts = posts.filter(post => post._id !== id)
+      dispatch({type: VERIFY_POST, payload: updatedPosts})
+    }
+  })
+}
+
+export const deletePost = (posts, id) => async dispatch => {
+  await Api.post.deletePost(id).then(res => {
+    if (res) {
+      const updatedPosts = posts.filter(post => post._id !== id)
+      dispatch({type: DELETE_POST, payload: updatedPosts})
+    }
   })
 }

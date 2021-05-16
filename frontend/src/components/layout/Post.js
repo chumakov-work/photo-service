@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from "react-redux"
-import {likePost} from "../../redux/actions"
+import {likePost, verifyPost, deletePost} from "../../redux/actions"
 
 const Post = props => {
   const [liked, changeLiked] = useState(false)
@@ -15,17 +15,30 @@ const Post = props => {
     props.likePost(props.posts, props.post._id)
   }
 
+  const verifyPost = () => {
+    props.verifyPost(props.unverifiedPosts, props.post._id)
+  }
+
+  const deletePost = () => {
+    props.deletePost(props.unverifiedPosts, props.post._id)
+  }
+
   return (
     <div  style={{marginBottom: '25px'}}>
       <h5>Автор {props.post.author}</h5>
       <h6>{props.post.location.name}</h6>
       <img src={props.post.imagePath} alt="asd" width="250px"/>
       <h6>Описание</h6>
-      <p>{props.post.description}</p>
+      <p>{props.post.description.length > 0 ? props.post.description : "Описание отсутствует"}</p>
 
-      {props.loggedIn && <div>
+      {props.loggedIn && !props.unverified && <div>
         <p>{props.post.likes}</p>
         {liked ? <button onClick={likeSomePost} disabled={true}>Нравится</button> : <button onClick={likeSomePost}>Нравится</button>}
+      </div>}
+
+      {props.loggedIn && props.unverified && <div>
+        <button onClick={verifyPost}>Одобрить</button>
+        <button onClick={deletePost}>Удалить</button>
       </div>}
     </div>
   )
@@ -35,8 +48,9 @@ const mapStateToProps = state => {
   return {
     loggedIn: state.user.loggedIn,
     userData: state.user.data,
-    posts: state.posts
+    posts: state.posts,
+    unverifiedPosts: state.unverifiedPosts
   }
 }
 
-export default connect(mapStateToProps, {likePost})(Post)
+export default connect(mapStateToProps, {likePost, verifyPost, deletePost})(Post)

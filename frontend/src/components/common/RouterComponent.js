@@ -2,10 +2,11 @@ import React from 'react'
 import {Switch, Route} from 'react-router-dom'
 
 // Pages
-import HomePage from "../../pages/HomePage";
-import Login from "../../pages/Login";
-import Signup from "../../pages/Signup";
-import Profile from "../../pages/Profile";
+import HomePage from "../../pages/HomePage"
+import Login from "../../pages/Login"
+import Signup from "../../pages/Signup"
+import Profile from "../../pages/Profile"
+import Admin from "../../pages/Admin"
 
 const RouterComponent = () => {
   return (
@@ -24,6 +25,10 @@ const RouterComponent = () => {
 
       <Route path="/me" exact>
         <Profile />
+      </Route>
+
+      <Route path="/admin" exact>
+        <Admin />
       </Route>
     </Switch>
   )

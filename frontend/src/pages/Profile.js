@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
+import {Redirect} from 'react-router-dom'
 import {connect} from "react-redux"
 import {toast} from "react-toastify"
-import SearchLocationComponent from "../components/common/SearchLocationComponent";
+import SearchLocationComponent from "../components/common/SearchLocationComponent"
 
 import {logoutAction, newPostAction} from "../redux/actions"
 
@@ -26,6 +27,8 @@ const Profile = props => {
     formData.append('post', image, image.name)
     props.newPostAction(description, formData, coords)
   }
+
+  if (props.user.isAdmin) return <Redirect to="/admin" />
 
   return (
     <main>
