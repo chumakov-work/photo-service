@@ -1,6 +1,7 @@
 const fs = require('fs')
 const getCurrentUser = require('./../Utils/verification').getLoginFromToken
 const PostModel = require('./../Models/Post')
+const UserModel = require('./../Models/User')
 
 // POST IMAGE
 const uploadPostImage = async (req, res, upload) => {
@@ -65,11 +66,19 @@ const likePost = async (req, res) => {
     }
   })
 
-  await PostModel
-    .updateMany({_id: id}, {$set: {likes: likes.likes, likedBy: likes.likedBy}})
-    .then(() => {
-      res.status(200).json({error: false, message: "Успешно", post: {...likes.post._doc, likes: likes.likes}})
-    })
+  if (likes.likedBy) {
+    await PostModel
+      .updateMany({_id: id}, {$set: {likes: likes.likes, likedBy: likes.likedBy}})
+      .then(() => {
+        res.status(200).json({error: false, message: "Успешно", post: {...likes.post._doc, likes: likes.likes}})
+      })
+    
+    const user = await UserModel.findOne({login})
+    user.liked.push(likes.post._doc)
+    await UserModel.updateMany({login}, {$set: {liked: user.liked}})
+  } else {
+    res.status(400).json({error: true, message: "Нельзя добавить в {liked} один и тот же пост два раза!"})
+  }
 }
 
 const dislikePost = async (req, res) => {

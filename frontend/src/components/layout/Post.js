@@ -25,7 +25,7 @@ const Post = props => {
 
       {props.loggedIn && <div>
         <p>{props.post.likes}</p>
-        {liked ? <button onClick={likeSomePost}>Не нравится</button> : <button onClick={likeSomePost}>Нравится</button>}
+        {liked ? <button onClick={likeSomePost} disabled={true}>Нравится</button> : <button onClick={likeSomePost}>Нравится</button>}
       </div>}
     </div>
   )

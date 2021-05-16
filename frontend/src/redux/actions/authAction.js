@@ -60,7 +60,9 @@ export const isLoggedIn = () => async dispatch => {
   }
 
   Api.user.getCurrentUser().then(res => {
-    const payload = res.data
-    dispatch({type: LOGIN_USER, payload})
+    if (res) {
+      const payload = res.data
+      dispatch({type: LOGIN_USER, payload})
+    }
   })
 }
