@@ -31,12 +31,12 @@ const Post = props => {
       <h6>Описание</h6>
       <p>{props.post.description.length > 0 ? props.post.description : "Описание отсутствует"}</p>
 
-      {props.loggedIn && !props.unverified && <div>
+      {props.loggedIn && !props.fromProfile && !props.unverified && <div>
         <p>{props.post.likes}</p>
         {liked ? <button onClick={likeSomePost} disabled={true}>Нравится</button> : <button onClick={likeSomePost}>Нравится</button>}
       </div>}
 
-      {props.loggedIn && props.unverified && <div>
+      {props.loggedIn && !props.fromProfile && props.unverified && <div>
         <button onClick={verifyPost}>Одобрить</button>
         <button onClick={deletePost}>Удалить</button>
       </div>}
