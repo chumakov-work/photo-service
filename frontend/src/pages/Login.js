@@ -3,6 +3,8 @@ import {Link} from "react-router-dom"
 import {connect} from "react-redux"
 import {loginAction} from "../redux/actions/authAction"
 import history from './../components/common/HistoryComponent'
+import {Input, Button} from "@material-ui/core"
+import "./../styles/login.css"
 
 const Login = props => {
   const [login, changeLogin] = useState("")
@@ -19,19 +21,18 @@ const Login = props => {
   if (props.loggedIn) history.push('/me')
   return (
     <main>
-      <form>
+      <form id="loginForm">
         <label htmlFor="login">
-          <input type="text" id="login" placeholder="login" onChange={e => changeLogin(e.target.value)}/>
+          <Input type="text" id="login" placeholder="Логин" onChange={e => changeLogin(e.target.value)}/>
         </label>
 
         <label htmlFor="password">
-          <input type="text" id="login" placeholder="password" onChange={e => changePassword(e.target.value)}/>
+          <Input type="password" id="password" placeholder="Пароль" onChange={e => changePassword(e.target.value)}/>
         </label>
 
-        <input type="submit" value="Войти" onClick={submitForm}/>
+        <Button onClick={submitForm}>Войти</Button>
+        <Link className="outside-link" to="/signup">Еще нет аккаунта? Создать</Link>
       </form>
-
-      <Link to="/signup">Еще нет аккаунта? Создать</Link>
     </main>
   )
 }

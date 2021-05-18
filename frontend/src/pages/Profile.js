@@ -15,7 +15,8 @@ const Profile = props => {
 
   const [location, changeLocation] = useState("")
   const [coords, changeCoords] = useState("")
-  // const [chips, changeChips] = useState(null)
+  const [chips, changeChips] = useState([])
+  const [tagName, changeTagName] = useState("")
 
   if (!props.user) return <p>loading</p>
 
@@ -29,12 +30,27 @@ const Profile = props => {
 
     const formData = new FormData()
     formData.append('post', image, image.name)
-    props.newPostAction(description, formData, coords)
+    props.newPostAction(description, formData, coords, chips)
 
     changeDescription("")
     changeImage(null)
     changeLocation("")
     changeCoords("")
+    changeChips([])
+    changeTagName("")
+  }
+
+  const addTagToPost = event => {
+    event.preventDefault()
+
+    if (tagName && chips.length < 10) {
+      const updatedChips = chips
+      updatedChips.push(tagName)
+      changeChips(updatedChips)
+      changeTagName("")
+    } else {
+      toast.error("Максимальное колиество тегов - 10")
+    }
   }
 
   if (props.user.isAdmin) return <Redirect to="/admin" />
@@ -50,6 +66,15 @@ const Profile = props => {
           <div className="form-container">
             <h5>Загрузите изображение</h5>
             <Input type="file" name="post" accept=".jpg, .jpeg, .png" className="image-input" onChange={e => changeImage(e.target.files[0])}/>
+          </div>
+
+          <div className="form-container">
+            <h5>Укажите тэги</h5>
+
+            <div className="tags-container">
+              <Input value={tagName} placeholder="Текст тэга" onChange={e => changeTagName(e.target.value)}/>
+              <input type="submit" value="+" onClick={addTagToPost}/>
+            </div>
           </div>
 
           <div className="form-container desc-container">

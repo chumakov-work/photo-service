@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
-import {Link} from "react-router-dom";
-import {connect} from "react-redux";
-import {signupAction} from "../redux/actions";
-import history from "../components/common/HistoryComponent";
+import {Link} from "react-router-dom"
+import {connect} from "react-redux"
+import {signupAction} from "../redux/actions"
+import history from "../components/common/HistoryComponent"
+import {Input, Button} from "@material-ui/core"
+import "./../styles/login.css"
 
 const Signup = props => {
   const [login, changeLogin] = useState("")
@@ -20,23 +22,22 @@ const Signup = props => {
   if (props.loggedIn) history.push('/')
   return (
     <main>
-      <form>
+      <form id="registerForm">
         <label htmlFor="login">
-          <input type="text" id="login" placeholder="login" onChange={e => changeLogin(e.target.value)}/>
+          <Input type="text" id="login" placeholder="Логин" onChange={e => changeLogin(e.target.value)}/>
         </label>
 
         <label htmlFor="email">
-          <input type="text" id="name" placeholder="name" onChange={e => changeName(e.target.value)}/>
+          <Input type="text" id="name" placeholder="Имя" onChange={e => changeName(e.target.value)}/>
         </label>
 
         <label htmlFor="password">
-          <input type="password" id="password" placeholder="password" onChange={e => changePassword(e.target.value)}/>
+          <Input type="password" id="password" placeholder="Пароль" onChange={e => changePassword(e.target.value)}/>
         </label>
 
-        <input type="submit" value="Создать" onClick={submitForm}/>
+        <Button onClick={submitForm}>Создать</Button>
+        <Link className="outside-link" to="/login">Уже есть аккаунт? Войти</Link>
       </form>
-
-      <Link to="/login">Уже есть аккаунт? Войти</Link>
     </main>
   )
 }

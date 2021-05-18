@@ -3,13 +3,14 @@ import {BACKEND_ADDR} from "../../Config"
 import {LIKE_POST, LOAD_POSTS, LOAD_UNVERIFIED_POSTS, DELETE_POST, VERIFY_POST} from "../types";
 import { toast } from 'react-toastify';
 
-export const newPostAction = (description, image, coords) => async dispatch => {
+export const newPostAction = (description, image, coords, tags) => async dispatch => {
   await Api.post.uploadImage(image).then(res => {
     Api.post.createPost({
       imagePath: `${BACKEND_ADDR}/post/image/${res.data.filename}`,
       description,
       author: null,
-      location: coords
+      location: coords,
+      tags
     }).then(result => {
       if (result) toast.success("Пост успешно отправлен в модерацию")
     })

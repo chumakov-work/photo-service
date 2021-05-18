@@ -1,0 +1,19 @@
+#loginForm *, #registerForm * {
+    width: 350px !important;
+
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+#loginForm, #registerForm {
+    margin: 50px auto;
+}
+
+.outside-link {
+    text-align: center;
+    color: #000;
+    text-decoration: underline;
+
+    margin-top: 25px;
+}

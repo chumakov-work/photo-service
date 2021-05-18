@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getUnverifiedPosts, logoutAction} from './../redux/actions'
+import {getUnverifiedPosts} from './../redux/actions'
 import Post from './../components/layout/Post'
 
 const Admin = props => {
@@ -11,8 +11,6 @@ const Admin = props => {
     return (
         <main id="main-page">
             <div id="newest-posts" style={{margin: '50px'}}>
-                <button onClick={props.logoutAction}>Logout</button>
-
                 <h4>Ожидают модерации</h4>
                 {props.posts && props.posts.map(post => <Post post={post} unverified={true}/>)}
             </div>
@@ -27,4 +25,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {getUnverifiedPosts, logoutAction})(Admin)
+export default connect(mapStateToProps, {getUnverifiedPosts})(Admin)

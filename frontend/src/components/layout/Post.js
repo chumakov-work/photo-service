@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {connect} from "react-redux"
 import {likePost, verifyPost, deletePost} from "../../redux/actions"
 import { makeStyles } from '@material-ui/core/styles';
-import {Card, CardContent, CardHeader, CardMedia, Button} from "@material-ui/core"
+import {Card, CardContent, CardHeader, CardMedia, Button, Chip} from "@material-ui/core"
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 
@@ -17,6 +17,9 @@ const useStyles = makeStyles({
   button: {
     marginTop: 10,
     marginRight: 15
+  },
+  chip: {
+    marginRight: 5
   }
 });
 
@@ -43,6 +46,8 @@ const Post = props => {
 
   const classes = useStyles()
 
+  console.log(props.post.tags)
+
   return (
     <div>
       <Card className={classes.root}>
@@ -61,6 +66,9 @@ const Post = props => {
         </CardContent>
 
         <CardContent>
+          {props.post && props.post.tags && props.post.tags.map(tag => <Chip size="small" label={tag} className={classes.chip}/>)}
+
+
           {props.loggedIn && !props.fromProfile && !props.unverified && <div>
             <p>{props.post.likes}</p>
             

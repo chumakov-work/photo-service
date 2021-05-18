@@ -31,9 +31,29 @@ form h5 {
     width: 100%;
 }
 
+.form-container .tags-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-container .tags-container input[type=submit] {
+   width: 10%;
+   border: 1px solid blue;
+   background: transparent;
+   border-radius: 4px;
+   cursor: pointer;
+   transition: .15s linear;
+}
+
+.form-container .tags-container input[type=submit]:hover {
+    background: blue;
+    color: #fff;
+    transition: .15s linear;
+ }
+
 .search-input {
     position: absolute;
-    margin-top: 120px;
+    margin-top: 190px;
 }
 
 .submitBtn {
