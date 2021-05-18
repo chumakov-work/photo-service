@@ -1,0 +1,22 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 20px;
+    background: #fff;
+    border-bottom: 2px solid cornflowerblue;
+
+    margin-bottom: 15px;
+}
+
+header a {
+    color: cornflowerblue
+}
+  
+.logotype {
+    font-size: 22px;
+    font-weight: 700;
+    color: cornflowerblue;
+}
+  

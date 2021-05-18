@@ -1,6 +1,24 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from "react-redux"
 import {likePost, verifyPost, deletePost} from "../../redux/actions"
+import { makeStyles } from '@material-ui/core/styles';
+import {Card, CardContent, CardHeader, CardMedia, Button} from "@material-ui/core"
+import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 390,
+    marginBottom: 25
+  },
+  media: {
+    height: 140,
+  },
+  button: {
+    marginTop: 10,
+    marginRight: 15
+  }
+});
 
 const Post = props => {
   const [liked, changeLiked] = useState(false)
@@ -23,23 +41,64 @@ const Post = props => {
     props.deletePost(props.unverifiedPosts, props.post._id)
   }
 
+  const classes = useStyles()
+
   return (
-    <div  style={{marginBottom: '25px'}}>
-      <h5>Автор {props.post.author}</h5>
-      <h6>{props.post.location.name}</h6>
-      <img src={props.post.imagePath} alt="asd" width="250px"/>
-      <h6>Описание</h6>
-      <p>{props.post.description.length > 0 ? props.post.description : "Описание отсутствует"}</p>
+    <div>
+      <Card className={classes.root}>
+        <CardHeader
+          title={`Автор ${props.post.author}`}
+        />
 
-      {props.loggedIn && !props.fromProfile && !props.unverified && <div>
-        <p>{props.post.likes}</p>
-        {liked ? <button onClick={likeSomePost} disabled={true}>Нравится</button> : <button onClick={likeSomePost}>Нравится</button>}
-      </div>}
+        <CardMedia
+          className={classes.media}
+          image={props.post.imagePath}
+          title={props.post.author}
+        />
 
-      {props.loggedIn && !props.fromProfile && props.unverified && <div>
-        <button onClick={verifyPost}>Одобрить</button>
-        <button onClick={deletePost}>Удалить</button>
-      </div>}
+        <CardContent>
+          {props.post.description.length > 0 ? `Описание: ${props.post.description}` : "Описание отсутствует"}
+        </CardContent>
+
+        <CardContent>
+          {props.loggedIn && !props.fromProfile && !props.unverified && <div>
+            <p>{props.post.likes}</p>
+            
+            <div className="likesButton">
+            {liked ? 
+              <Button variant="contained" color="secondary" disabled className={classes.button}>
+                Нравится
+              </Button> : 
+              <Button variant="contained" color="secondary" onClick={likeSomePost} className={classes.button}>
+                Нравится
+              </Button>
+            }
+            </div>
+          </div>}
+
+          {props.loggedIn && !props.fromProfile && props.unverified && <div>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={verifyPost}
+              startIcon={<SaveIcon />}
+            >
+              Одобрить
+            </Button>
+                
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={deletePost}
+              className={classes.button}
+              startIcon={<DeleteIcon />}
+            >
+              Удалить
+            </Button>
+          </div>}
+        </CardContent>
+      </Card>
     </div>
   )
 }
