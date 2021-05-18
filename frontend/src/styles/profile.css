@@ -1,0 +1,75 @@
+form {
+    width: min-content;
+    margin: 25px 0 0 0;
+    text-align: left;
+}
+
+form .form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    border-radius: 8px;
+    padding: 5px 15px;
+
+    background: transparent;
+    border: 2px solid cornflowerblue;
+}
+
+form h5 {
+    margin-bottom: 5px;
+}
+
+.form-container {
+    padding: 5px;
+    background: transparent;
+    width: 350px;
+    height: 50px;
+}
+
+.form-container * {
+    width: 100%;
+}
+
+.form-container .tags-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-container .tags-container input[type=submit] {
+   width: 10%;
+   border: 1px solid blue;
+   background: transparent;
+   border-radius: 4px;
+   cursor: pointer;
+   transition: .15s linear;
+}
+
+.form-container .tags-container input[type=submit]:hover {
+    background: blue;
+    color: #fff;
+    transition: .15s linear;
+ }
+
+.search-input {
+    position: absolute;
+    margin-top: 190px;
+}
+
+.submitBtn {
+    margin-top: 75px;
+    margin-bottom: 10px;
+}
+
+.liked {
+    margin-top: 25px;
+}
+
+.liked .title {
+    margin-bottom: 10px;
+}
+
+.likesButton {
+    display: flex;
+    justify-content: flex-end;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Input } from '@material-ui/core';
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 
 const SearchLocationComponent = props => {
@@ -22,19 +23,18 @@ const SearchLocationComponent = props => {
     >
       {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
         <div>
-          <input
+          <Input
             {...getInputProps({
-              placeholder: 'Search Places ...',
+              placeholder: 'Локация',
               className: 'location-search-input',
             })}
           />
           <div className="autocomplete-dropdown-container">
-            {loading && <div>Loading...</div>}
+            {loading && <div>Загрузка...</div>}
             {suggestions.map(suggestion => {
               const className = suggestion.active
                 ? 'suggestion-item--active'
                 : 'suggestion-item';
-              // inline style for demonstration purpose
               const style = suggestion.active
                 ? {backgroundColor: '#fafafa', cursor: 'pointer'}
                 : {backgroundColor: '#ffffff', cursor: 'pointer'};

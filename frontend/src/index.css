@@ -19,19 +19,6 @@ code {
     monospace;
 }
 
-
-
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  background: #f1f1f1;
-}
-
-.logotype {
-  font-size: 26px;
-  font-weight: 700;
-  color: cornflowerblue;
+#profilePage {
+  padding: 15px 35px;
 }
