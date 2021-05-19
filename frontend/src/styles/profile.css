@@ -53,12 +53,21 @@ form h5 {
 
 .search-input {
     position: absolute;
-    margin-top: 190px;
+    margin-top: 210px;
 }
 
 .submitBtn {
     margin-top: 75px;
     margin-bottom: 10px;
+}
+
+.chip-container {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    text-align: left;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .liked {

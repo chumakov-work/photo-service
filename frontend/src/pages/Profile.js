@@ -1,15 +1,26 @@
 import React, {useState} from 'react'
 import {Redirect} from 'react-router-dom'
 import {connect} from "react-redux"
-import {Input, Button} from '@material-ui/core';
+import {Input, Button, Chip} from '@material-ui/core';
 import {toast} from "react-toastify"
+import { makeStyles } from '@material-ui/core/styles';
 
 import SearchLocationComponent from "../components/common/SearchLocationComponent"
-import {logoutAction, newPostAction} from "../redux/actions"
+import {newPostAction} from "../redux/actions"
 import Post from './../components/layout/Post'
 import './../styles/profile.css'
 
 const Profile = props => {
+  const useStyles = makeStyles({
+    chip: {
+      marginRight: 5,
+      marginTop: 5,
+      zIndex: 9999
+    }
+  })
+
+  const classes = useStyles()
+
   const [description, changeDescription] = useState("")
   const [image, changeImage] = useState(null)
 
@@ -57,8 +68,6 @@ const Profile = props => {
 
   return (
     <main id="profilePage">
-      <button onClick={props.logoutAction}>Logout</button>
-
       <form onSubmit={createPost} encType="multipart/form-data">
         <h5>Создать новый пост</h5>
 
@@ -69,17 +78,17 @@ const Profile = props => {
           </div>
 
           <div className="form-container">
+            <h5>Добавьте описание</h5>
+            <Input value={description} placeholder="Описание" onChange={e => changeDescription(e.target.value)}/>
+          </div>
+
+          <div className="form-container desc-container">
             <h5>Укажите тэги</h5>
 
             <div className="tags-container">
               <Input value={tagName} placeholder="Текст тэга" onChange={e => changeTagName(e.target.value)}/>
               <input type="submit" value="+" onClick={addTagToPost}/>
             </div>
-          </div>
-
-          <div className="form-container desc-container">
-            <h5>Добавьте описание</h5>
-            <Input value={description} placeholder="Описание" onChange={e => changeDescription(e.target.value)}/>
           </div>
 
           <div className="form-container search-input">
@@ -90,6 +99,11 @@ const Profile = props => {
               coords={coords}
               changeCoords={changeCoords.bind(this)}
             />
+          </div>
+
+          <div className="chip-container">
+            <Chip size="small" label="Тэги:" className={classes.chip}/>
+            {chips && chips.map(tag => <Chip size="small" label={tag} className={classes.chip}/>)}
           </div>
 
           <div className="submitBtn"><Button variant="outlined" color="primary" onClick={createPost}>Создать пост</Button></div>
@@ -111,4 +125,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {logoutAction, newPostAction})(Profile)
+export default connect(mapStateToProps, {newPostAction})(Profile)
