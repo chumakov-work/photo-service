@@ -9,6 +9,7 @@ import SearchLocationComponent from "../components/common/SearchLocationComponen
 import {newPostAction} from "../redux/actions"
 import Post from './../components/layout/Post'
 import './../styles/profile.css'
+import PickPlaceGoogleMap from './../components/layout/PickPlaceGoogleMap'
 
 const Profile = props => {
   const useStyles = makeStyles({
@@ -16,6 +17,9 @@ const Profile = props => {
       marginRight: 5,
       marginTop: 5,
       zIndex: 9999
+    },
+    input: {
+      width: '100%'
     }
   })
 
@@ -73,32 +77,28 @@ const Profile = props => {
 
         <div className="form">
           <div className="form-container">
-            <h5>Загрузите изображение</h5>
-            <Input type="file" name="post" accept=".jpg, .jpeg, .png" className="image-input" onChange={e => changeImage(e.target.files[0])}/>
-          </div>
-
-          <div className="form-container">
-            <h5>Добавьте описание</h5>
-            <Input value={description} placeholder="Описание" onChange={e => changeDescription(e.target.value)}/>
-          </div>
-
-          <div className="form-container desc-container">
-            <h5>Укажите тэги</h5>
-
-            <div className="tags-container">
-              <Input value={tagName} placeholder="Текст тэга" onChange={e => changeTagName(e.target.value)}/>
-              <input type="submit" value="+" onClick={addTagToPost}/>
+              <h6>Загрузите изображение</h6>
+              <Input type="file" name="post" accept=".jpg, .jpeg, .png" onChange={e => changeImage(e.target.files[0])}/>
             </div>
-          </div>
 
-          <div className="form-container search-input">
-            <h5>Укажите локацию</h5>
-            <SearchLocationComponent
-              location={location}
-              changeLocation={changeLocation.bind(this)}
-              coords={coords}
-              changeCoords={changeCoords.bind(this)}
-            />
+            <div className="form-container">
+              <h6>Добавьте описание</h6>
+              <Input value={description} placeholder="Описание" onChange={e => changeDescription(e.target.value)}/>
+            </div>
+
+            <div className="form-container desc-container">
+              <h6>Укажите тэги</h6>
+
+              <div className="tags-container">
+                <Input value={tagName} placeholder="Текст тэга" onChange={e => changeTagName(e.target.value)}/>
+                <input type="submit" value="+" onClick={addTagToPost}/>
+              </div>
+            </div>
+          
+          <div className="form-container location-input">
+            <h6>Укажите локацию</h6>
+
+            <PickPlaceGoogleMap changeCoords={changeCoords.bind(this)} />
           </div>
 
           <div className="chip-container">

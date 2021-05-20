@@ -1,0 +1,16 @@
+#main-page {
+    display: flex;
+}
+
+#newest-posts {
+    width: 350px;
+}
+
+#map {
+    margin-top: 15px;
+    border-radius: 8px !important;
+}
+
+* {
+    /* overflow-x: hidden !important; */
+}
