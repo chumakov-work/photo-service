@@ -60,6 +60,10 @@ const Post = props => {
         />
 
         <CardContent>
+          {props.post && props.post.location && props.post.location.name ? props.post.location.name : "Местоположение не указано"}
+        </CardContent>
+
+        <CardContent>
           {props.post.description.length > 0 ? `Описание: ${props.post.description}` : "Описание отсутствует"}
         </CardContent>
 
@@ -67,7 +71,7 @@ const Post = props => {
           {props.post && props.post.tags && props.post.tags.map(tag => <Chip size="small" label={tag} className={classes.chip}/>)}
 
           {props.loggedIn && !props.fromProfile && !props.unverified && <div>
-            <p>{props.post.likes}</p>
+            <p>Понравилось <b>{props.post.likes}</b> людям</p>
             
             <div className="likesButton">
             {liked ? 

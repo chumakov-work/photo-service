@@ -7,6 +7,7 @@ import Login from "../../pages/Login"
 import Signup from "../../pages/Signup"
 import Profile from "../../pages/Profile"
 import Admin from "../../pages/Admin"
+import Post from '../../pages/SomePost'
 
 const RouterComponent = () => {
   return (
@@ -29,6 +30,10 @@ const RouterComponent = () => {
 
       <Route path="/admin" exact>
         <Admin />
+      </Route>
+
+      <Route path="/post/:id" exact>
+        <Post />
       </Route>
     </Switch>
   )

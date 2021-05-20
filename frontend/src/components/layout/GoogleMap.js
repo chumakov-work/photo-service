@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react'
+import history from './../common/HistoryComponent'
 
 const GoogleMap = props => {
+
+    useEffect(() => console.log('effect, props is: ', props))
+    
+    console.log(props)
+
     const markers = []
     const bounds = new props.google.maps.LatLngBounds()
     for (let i = 0; i < markers.length; i++) {
@@ -16,30 +22,10 @@ const GoogleMap = props => {
     const points = []
     if (props.posts) {
         props.posts.map(post => post.location && points.push({
-            image: new props.google.maps.MarkerImage(
-                post.imagePath,
-                null,
-                null,
-                null,
-                new window.google.maps.Size(32, 32)
-            ),
-            position: {lat: post.location.lat, lng: post.location.lng}
+            position: {lat: post.location.lat, lng: post.location.lng},
+            post
         }))
     }
-
-    // let startCoordinates = {}
-
-    // if (props.userPosition && props.userPosition.location) {
-    //     startCoordinates = {
-    //         lat: props.userPosition.location.lat,
-    //         lng: props.userPosition.location.lon
-    //     }
-    // } else {
-    //     startCoordinates = {
-    //         lat: 55.7415916,
-    //         lng: 52.42225
-    //     }
-    // }
 
     return (
         <div>
@@ -54,9 +40,9 @@ const GoogleMap = props => {
                     lng: 52.38928850000001
                 }}
             >
-                {props.posts && points && points.map(point => <Marker 
-                    icon={point.image}
+                {props.posts && points && points.map(point => <Marker
                     position={point.position}
+                    onClick={() => history.push(`/post/${point.post._id}`)}
                 />)}
             </Map>
         </div>

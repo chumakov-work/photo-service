@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {connect} from "react-redux"
 import {getVerifiedPosts} from "../redux/actions"
 import Post from "../components/layout/Post"
@@ -6,8 +6,14 @@ import GoogleMap from './../components/layout/GoogleMap'
 
 import "./../styles/homePage.css"
 
-const HomePage = (props) => {
+const HomePage = props => {
+  const [fixedPosts, changeFixedPosts] = useState(false)
   if (!props.posts) props.getVerifiedPosts()
+
+  useEffect(() => {
+    console.log('rendered HomePage.js')
+    if (props.posts) changeFixedPosts(true)
+  })
 
   return (
     <main id="main-page">
@@ -17,7 +23,7 @@ const HomePage = (props) => {
       </div>
 
       <div id="map">
-        {props.posts && props.user && <GoogleMap posts={props.posts} userPosition={props.user} />}
+        {fixedPosts && <GoogleMap posts={props.posts}/>}
       </div>
     </main>
   )
