@@ -79,6 +79,10 @@ const deletePost = id => {
   return axios.delete(`/post/${id}`)
 }
 
+const getSinglePost = id => {
+  return axios.get(`/post/${id}`)
+}
+
 // eslint-disable-next-line
 export default {
   auth: {
@@ -88,6 +92,6 @@ export default {
     getCurrentUser
   },
   post: {
-    uploadImage, createPost, getAllPosts, likePost, getPostsOnVerification, verifyPost, deletePost
+    uploadImage, createPost, getAllPosts, likePost, getPostsOnVerification, verifyPost, deletePost, getSinglePost
   }
 }

@@ -2,10 +2,11 @@ import {combineReducers} from "redux"
 
 // Reducers
 import userReducer from "./reducers/userReducer"
-import {postReducer, unverifiedPostsReducers} from "./reducers/postReducer"
+import {postReducer, unverifiedPostsReducers, signlePostReducer} from "./reducers/postReducer"
 
 export const rootReducer = combineReducers({
   user: userReducer,
   posts: postReducer,
-  unverifiedPosts: unverifiedPostsReducers
+  unverifiedPosts: unverifiedPostsReducers,
+  singlePost: signlePostReducer
 })

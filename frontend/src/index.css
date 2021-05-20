@@ -22,3 +22,10 @@ code {
 #profilePage {
   padding: 15px 35px;
 }
+
+#singlePostPage {
+  width: 350px;
+  margin: 100px auto;
+  padding: 25px;
+  background: rgba(0, 0, 0, .025);
+}
