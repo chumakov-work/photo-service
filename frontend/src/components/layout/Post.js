@@ -59,9 +59,9 @@ const Post = props => {
           title={props.post.author}
         />
 
-        <CardContent>
-          {props.post && props.post.location && props.post.location.name ? props.post.location.name : "Местоположение не указано"}
-        </CardContent>
+        {/* <CardContent>
+          {props.post && props.post.location ? props.post.location.name ? props.post.location.name : "Местоположение не указано" : "Местоположение не указано"}
+        </CardContent> */}
 
         <CardContent>
           {props.post.description.length > 0 ? `Описание: ${props.post.description}` : "Описание отсутствует"}

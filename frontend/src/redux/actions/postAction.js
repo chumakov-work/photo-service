@@ -1,6 +1,6 @@
 import Api from './../../api/ApiClient'
 import {BACKEND_ADDR} from "../../Config"
-import {LIKE_POST, LOAD_POSTS, LOAD_UNVERIFIED_POSTS, DELETE_POST, VERIFY_POST} from "../types";
+import {LIKE_POST, LOAD_POSTS, LOAD_UNVERIFIED_POSTS, DELETE_POST, VERIFY_POST, LOAD_SINGLE_POST} from "../types";
 import { toast } from 'react-toastify';
 
 export const newPostAction = (description, image, coords, tags) => async dispatch => {
@@ -65,5 +65,11 @@ export const deletePost = (posts, id) => async dispatch => {
       const updatedPosts = posts.filter(post => post._id !== id)
       dispatch({type: DELETE_POST, payload: updatedPosts})
     }
+  })
+}
+
+export const getSinglePost = id => async dispatch => {
+  await Api.post.getSinglePost(id).then(res => {
+    if (res) dispatch({type: LOAD_SINGLE_POST, payload: res.data})
   })
 }

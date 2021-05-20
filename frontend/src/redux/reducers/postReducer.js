@@ -1,4 +1,4 @@
-import {LIKE_POST, LOAD_POSTS, LOAD_UNVERIFIED_POSTS, VERIFY_POST, DELETE_POST} from "../types";
+import {LIKE_POST, LOAD_POSTS, LOAD_UNVERIFIED_POSTS, VERIFY_POST, DELETE_POST, LOAD_SINGLE_POST} from "../types";
 
 const initState = null
 
@@ -26,4 +26,11 @@ export const unverifiedPostsReducers = (state = null, action) => {
   }
 }
 
-export default postReducer
+export const signlePostReducer = (state = null, action) => {
+  switch(action.type) {
+    case LOAD_SINGLE_POST:
+      return action.payload
+    default:
+      return state
+  }
+}
