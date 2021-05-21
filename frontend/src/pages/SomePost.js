@@ -33,7 +33,7 @@ const SomePost = props => {
         if (props.userData && props.post && props.post.likedBy) {
           changeLiked(props.post.likedBy.filter(user => user === props.userData.login).length > 0)
         }
-      }, [props.userData, props.post])
+      }, [props, props.userData, props.post, id])
 
     const likeSomePost = () => {
         props.likePost(props.posts, props.post._id)
@@ -42,12 +42,12 @@ const SomePost = props => {
     if (!props.post) return <p>Загрузка...</p>
     return (
         <main id="singlePostPage">
-            <img src={props.post.imagePath} width="350px"/>
+            <img src={props.post.imagePath} width="350px" alt={props.post.imagePath}/>
             <p>Автор: {props.post.author}</p>
             <p>{props.post.description ? `Описание: ${props.post.description}` : 'Нет описания'}</p>
 
             {props.loggedIn && !props.fromProfile && !props.unverified && <div>
-            <p>Понравилось <b>{props.post.likes}</b> людям</p>
+            <p>Понравилось <b>{props.post.likes}</b></p>
             
             <div className="likesButton">
             {liked ? 

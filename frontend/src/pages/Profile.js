@@ -5,7 +5,6 @@ import {Input, Button, Chip} from '@material-ui/core';
 import {toast} from "react-toastify"
 import { makeStyles } from '@material-ui/core/styles';
 
-import SearchLocationComponent from "../components/common/SearchLocationComponent"
 import {newPostAction} from "../redux/actions"
 import Post from './../components/layout/Post'
 import './../styles/profile.css'
@@ -28,7 +27,6 @@ const Profile = props => {
   const [description, changeDescription] = useState("")
   const [image, changeImage] = useState(null)
 
-  const [location, changeLocation] = useState("")
   const [coords, changeCoords] = useState("")
   const [chips, changeChips] = useState([])
   const [tagName, changeTagName] = useState("")
@@ -49,7 +47,6 @@ const Profile = props => {
 
     changeDescription("")
     changeImage(null)
-    changeLocation("")
     changeCoords("")
     changeChips([])
     changeTagName("")

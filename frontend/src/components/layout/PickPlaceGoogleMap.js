@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState} from 'react'
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react'
 // import history from './../common/HistoryComponent'
 
