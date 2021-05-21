@@ -17,6 +17,12 @@ const HomePage = props => {
 
     // posts.map(post => console.log(post))
     props.posts.map(post => post.tags.map(tag => tag.includes(filterText) && posts.push(post)))
+
+    if (posts.length < 1) {
+      changeFilteredPosts(null)
+      return
+    }
+
     changeFilteredPosts(posts)
   }
 
@@ -33,8 +39,8 @@ const HomePage = props => {
         </div>}
 
         {filterText && <div id="newest-posts" style={{margin: '50px'}}>
-          <h4>Самые новые</h4>
-          {filteredPosts && filteredPosts.map(post => <Post post={post} unverified={false}/>)}
+          <h4>Результаты поиска</h4>
+          {filteredPosts !== null ? filteredPosts.map(post => <Post post={post} unverified={false}/>) : <p>Ничего не найдено</p>}
         </div>}
 
         <div id="map">
