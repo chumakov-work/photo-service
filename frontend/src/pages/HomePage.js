@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {connect} from "react-redux"
 import {getVerifiedPosts} from "../redux/actions"
 import Post from "../components/layout/Post"
@@ -7,24 +7,46 @@ import GoogleMap from './../components/layout/GoogleMap'
 import "./../styles/homePage.css"
 
 const HomePage = props => {
-  const [fixedPosts, changeFixedPosts] = useState(false)
+  const [filterText, changeFilterText] = useState("")
+  const [filteredPosts, changeFilteredPosts] = useState([])
   if (!props.posts) props.getVerifiedPosts()
 
-  useEffect(() => {
-    console.log('rendered HomePage.js')
-    if (props.posts) changeFixedPosts(true)
-  })
+  const filterPosts = text => {
+    changeFilterText(text)
+    const posts = []
+
+    // posts.map(post => console.log(post))
+    props.posts.map(post => post.tags.map(tag => tag.includes(filterText) && posts.push(post)))
+
+    if (posts.length < 1) {
+      changeFilteredPosts(null)
+      return
+    }
+
+    changeFilteredPosts(posts)
+  }
 
   return (
-    <main id="main-page">
-      <div id="newest-posts" style={{margin: '50px'}}>
-        <h4>Самые новые</h4>
-        {props.posts && props.posts.map(post => <Post post={post} unverified={false}/>)}
-      </div>
+    <main id="homePage">
+      <section>
+        <input id="filteringInput" type="text" value={filterText} placeholder="Начниете печатать название" onChange={event => filterPosts(event.target.value)}/>
+      </section>
 
-      <div id="map">
-        {fixedPosts && <GoogleMap posts={props.posts}/>}
-      </div>
+      <section id="main-page">
+        {!filterText && <div id="newest-posts" style={{margin: '50px'}}>
+          <h4>Самые новые</h4>
+          {props.posts && props.posts.map(post => <Post post={post} unverified={false}/>)}
+        </div>}
+
+        {filterText && <div id="newest-posts" style={{margin: '50px'}}>
+          <h4>Результаты поиска</h4>
+          {filteredPosts !== null ? filteredPosts.map(post => <Post post={post} unverified={false}/>) : <p>Ничего не найдено</p>}
+        </div>}
+
+        <div id="map">
+          <GoogleMap posts={props.posts}/>
+        </div>
+      </section>
     </main>
   )
 }

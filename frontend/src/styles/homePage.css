@@ -11,6 +11,22 @@
     border-radius: 8px !important;
 }
 
-* {
-    /* overflow-x: hidden !important; */
+#filteringInput {
+    width: 350px;
+    margin: 15px auto;
+    padding: 10px 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border: 2px solid #f1f1f1;
+    border-radius: 8px;
+
+    font-weight: 500;
+    color: rgba(0, 0, 0, .5);
+}
+
+#homePage {
+    /* width: 100vw; */
 }

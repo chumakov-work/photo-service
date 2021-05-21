@@ -1,22 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react'
 import history from './../common/HistoryComponent'
 
 const GoogleMap = props => {
-
-    useEffect(() => console.log('effect, props is: ', props))
-    
-    console.log(props)
-
     const markers = []
     const bounds = new props.google.maps.LatLngBounds()
     for (let i = 0; i < markers.length; i++) {
         bounds.extend(markers[i])
-    }
-
-    const mapStyles = {
-        width: '60%',
-        height: '90%'
     }
 
     const points = []
@@ -32,9 +22,9 @@ const GoogleMap = props => {
             <Map
                 scrollwheel={false}
                 google={props.google}
-                style={mapStyles}
                 zoom={16}
                 bounds={bounds}
+                containerStyle={{width: '60%', height: '90%', position: 'absolute'}}
                 initialCenter={{
                     lat: 55.7305685,
                     lng: 52.38928850000001
