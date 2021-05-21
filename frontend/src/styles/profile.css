@@ -2,9 +2,27 @@
     height: calc(auto + 350px);
 }
 
+.form {
+    width: 100%;
+}
+
 .submitBtn {
-    margin-top: 350px;
+    margin-top: 375px;
     margin-bottom: 100px;
+}
+
+.tagSubmitBtn {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, .35);
+    background: transparent;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+
+    color: rgba(0, 0, 0, .35);
+    font-weight: 800;
+    margin-left: 10px;
 }
 
 form h5 {

@@ -1,21 +1,16 @@
 import React from 'react'
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react'
 import history from './../common/HistoryComponent'
+import {connect} from 'react-redux'
 
 const GoogleMap = props => {
-    const markers = []
-    const bounds = new props.google.maps.LatLngBounds()
-    for (let i = 0; i < markers.length; i++) {
-        bounds.extend(markers[i])
-    }
-
     const points = []
     if (props.posts) {
         props.posts.map(post => post.location && points.push({
             position: {lat: post.location.lat, lng: post.location.lng},
             post
         }))
-    }
+    } 
 
     return (
         <div>
@@ -23,7 +18,6 @@ const GoogleMap = props => {
                 scrollwheel={false}
                 google={props.google}
                 zoom={16}
-                bounds={bounds}
                 containerStyle={{width: '60%', height: '90%', position: 'absolute'}}
                 initialCenter={{
                     lat: 55.7305685,
@@ -39,6 +33,12 @@ const GoogleMap = props => {
     )
 }
 
+const mapStateToProps = state => {
+    return {
+        posts: state.posts
+    }
+}
+
 export default GoogleApiWrapper({
     apiKey: "AIzaSyDBu_PqciBptn1CwARvl0SEDccnWzgW6bw"
-})(GoogleMap)
+})(connect(mapStateToProps, null)(GoogleMap))

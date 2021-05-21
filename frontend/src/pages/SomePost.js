@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, Link} from 'react-router-dom'
 import {getSinglePost, likePost} from './../redux/actions'
 import {connect} from 'react-redux'
 
@@ -41,27 +41,31 @@ const SomePost = props => {
 
     if (!props.post) return <p>Загрузка...</p>
     return (
-        <main id="singlePostPage">
+        <main id="somePost">
+          <Link to="/" className="backLink">Назад</Link>
+
+          <div id="singlePostPage">
             <img src={props.post.imagePath} width="350px" alt={props.post.imagePath}/>
-            <p>Автор: {props.post.author}</p>
-            <p>{props.post.description ? `Описание: ${props.post.description}` : 'Нет описания'}</p>
+              <p>Автор: {props.post.author}</p>
+              <p>{props.post.description ? `Описание: ${props.post.description}` : 'Нет описания'}</p>
 
-            {props.loggedIn && !props.fromProfile && !props.unverified && <div>
-            <p>Понравилось <b>{props.post.likes}</b></p>
-            
-            <div className="likesButton">
-            {liked ? 
-              <Button variant="contained" color="secondary" disabled className={classes.button}>
-                Нравится
-              </Button> : 
-              <Button variant="contained" color="secondary" onClick={likeSomePost} className={classes.button}>
-                Нравится
-              </Button>
-            }
-            </div>
-          </div>}
+              {props.loggedIn && !props.fromProfile && !props.unverified && <div>
+              <p>Понравилось <b>{props.post.likes}</b></p>
+              
+              <div className="likesButton">
+              {liked ? 
+                <Button variant="contained" color="secondary" disabled className={classes.button}>
+                  Нравится
+                </Button> : 
+                <Button variant="contained" color="secondary" onClick={likeSomePost} className={classes.button}>
+                  Нравится
+                </Button>
+              }
+              </div>
+            </div>}
 
-          <div style={{marginTop: '10px'}}>{props.post && props.post.tags && props.post.tags.map(tag => <Chip size="small" label={tag} className={classes.chip}/>)}</div>
+            <div style={{marginTop: '10px'}}>{props.post && props.post.tags && props.post.tags.map(tag => <Chip size="small" label={tag} className={classes.chip}/>)}</div>
+          </div>
         </main>
     )
 }
