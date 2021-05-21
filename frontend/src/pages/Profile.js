@@ -18,7 +18,7 @@ const Profile = props => {
       zIndex: 9999
     },
     input: {
-      width: '100%'
+      width: '350px'
     }
   })
 
@@ -75,32 +75,31 @@ const Profile = props => {
         <div className="form">
           <div className="form-container">
               <h6>Загрузите изображение</h6>
-              <Input type="file" name="post" accept=".jpg, .jpeg, .png" onChange={e => changeImage(e.target.files[0])}/>
+              <Input type="file" name="post" accept=".jpg, .jpeg, .png" className={classes.input} onChange={e => changeImage(e.target.files[0])}/>
             </div>
 
             <div className="form-container">
               <h6>Добавьте описание</h6>
-              <Input value={description} placeholder="Описание" onChange={e => changeDescription(e.target.value)}/>
+              <Input value={description} className={classes.input} placeholder="Описание" onChange={e => changeDescription(e.target.value)}/>
+            </div>
+
+            <div className="chip-container">
+              <Chip size="small" label="Тэги:" className={classes.chip}/>
+              {chips && chips.map(tag => <Chip size="small" label={tag} className={classes.chip}/>)}
             </div>
 
             <div className="form-container desc-container">
               <h6>Укажите тэги</h6>
 
               <div className="tags-container">
-                <Input value={tagName} placeholder="Текст тэга" onChange={e => changeTagName(e.target.value)}/>
-                <input type="submit" value="+" onClick={addTagToPost}/>
+                <Input value={tagName} className={classes.input} placeholder="Текст тэга" onChange={e => changeTagName(e.target.value)}/>
+                <input type="submit" value="+" className="tagSubmitBtn" onClick={addTagToPost}/>
               </div>
             </div>
           
           <div className="form-container location-input">
             <h6>Укажите локацию</h6>
-
             <PickPlaceGoogleMap changeCoords={changeCoords.bind(this)} />
-          </div>
-
-          <div className="chip-container">
-            <Chip size="small" label="Тэги:" className={classes.chip}/>
-            {chips && chips.map(tag => <Chip size="small" label={tag} className={classes.chip}/>)}
           </div>
 
           <div className="submitBtn"><Button variant="outlined" color="primary" onClick={createPost}>Создать пост</Button></div>

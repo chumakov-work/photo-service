@@ -44,7 +44,7 @@ const HomePage = props => {
         </div>}
 
         <div id="map">
-          <GoogleMap posts={props.posts}/>
+          <GoogleMap/>
         </div>
       </section>
     </main>
