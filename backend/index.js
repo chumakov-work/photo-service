@@ -24,6 +24,7 @@ app.post('/signup', authRoutes.signup)
 const userRoutes = require('./Routes/User')
 app.get('/me', verification, userRoutes.getCurrentUser)
 app.get('/make-me-admin', verification, userRoutes.changeUserRoleOnAdmin)
+app.get('/user/:login', userRoutes.getSomeUser)
 
 const postRoutes = require('./Routes/Post')
 app.get('/posts', postRoutes.getNewPosts)
