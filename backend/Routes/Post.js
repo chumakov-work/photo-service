@@ -26,8 +26,12 @@ const getPostImage = async (req, res) => {
 const newPost = async (req, res) => {
   const post = {...req.body, author: getCurrentUser(req.headers.authorization.split(' ')[1])}
 
-  await PostModel.create(post, (err, data) => {
-    return err ? res.status(400).json({error: true, err}) : res.status(201).json(data)
+  await PostModel.create(post).then(async postData => {
+    await UserModel.findOne({login: getCurrentUser(req.headers.authorization.split(' ')[1])}).then(async userData => {
+      const posts = [...userData.posts]
+      posts.push(postData._id)
+      await UserModel.findByIdAndUpdate(userData._id, {$set: {posts: posts}}).then(result => res.json(result))
+    })
   })
 }
 

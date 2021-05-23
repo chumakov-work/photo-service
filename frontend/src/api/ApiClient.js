@@ -49,6 +49,10 @@ const getCurrentUser = () => {
   return axios.get('/me')
 }
 
+const getSomeUser = id => {
+  return axios.get(`/user/${id}`)
+}
+
 const uploadImage = image => {
   return axios.post('/post-image', image, {
     headers: {'Content-Type': 'multipart/form-data; boundary=photo-service'},
@@ -89,7 +93,7 @@ export default {
     signup, login
   },
   user: {
-    getCurrentUser
+    getCurrentUser, getSomeUser
   },
   post: {
     uploadImage, createPost, getAllPosts, likePost, getPostsOnVerification, verifyPost, deletePost, getSinglePost

@@ -1,4 +1,4 @@
-import {LOGIN_USER, LOGOUT_USER, SET_USER_LOCATION} from "../types";
+import {LOGIN_USER, LOGOUT_USER, SET_USER_LOCATION, GET_SOME_USER} from "../types";
 
 const initState = {
   loggedIn: false,
@@ -6,7 +6,7 @@ const initState = {
   location: null
 }
 
-const userReducer = (state = initState, action) => {
+export const userReducer = (state = initState, action) => {
   switch (action.type) {
     case LOGIN_USER:
       return {...state, loggedIn: true, data: action.payload}
@@ -19,4 +19,11 @@ const userReducer = (state = initState, action) => {
   }
 }
 
-export default userReducer
+export const someUserReducer = (state = null, action) => {
+  switch (action.type) {
+    case GET_SOME_USER:
+      return action.payload
+    default:
+      return state
+  }
+}

@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Redirect} from 'react-router-dom'
 import {connect} from "react-redux"
 import {Input, Button, Chip} from '@material-ui/core';
 import {toast} from "react-toastify"
 import { makeStyles } from '@material-ui/core/styles';
 
-import {newPostAction} from "../redux/actions"
+import {newPostAction, someUserAction} from "../redux/actions"
 import Post from './../components/layout/Post'
 import './../styles/profile.css'
 import PickPlaceGoogleMap from './../components/layout/PickPlaceGoogleMap'
@@ -110,6 +110,11 @@ const Profile = props => {
         <p className="title">Понравившиеся</p>
         {props.user.liked && props.user.liked.map(post => <Post post={post} fromProfile={true}/>)}
       </div>
+
+      <div className="liked">
+        <h3 className="title">Мои Посты</h3>
+        {props.user.posts && props.user.posts.length > 0 ? props.user.posts.map(post => <Post post={post} unverified={false}/>): "Постов нет"}
+      </div>
     </main>
   )
 }
@@ -117,8 +122,9 @@ const Profile = props => {
 const mapStateToProps = state => {
   return {
     loggedIn: state.user.loggedIn,
-    user: state.user.data
+    user: state.user.data,
+    userPosts: state.someUser
   }
 }
 
-export default connect(mapStateToProps, {newPostAction})(Profile)
+export default connect(mapStateToProps, {newPostAction, someUserAction})(Profile)

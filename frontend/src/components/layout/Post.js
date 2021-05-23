@@ -8,7 +8,7 @@ import SaveIcon from '@material-ui/icons/Save'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 390,
+    width: 350,
     marginBottom: 25
   },
   media: {
@@ -46,6 +46,8 @@ const Post = props => {
 
   const classes = useStyles()
 
+  if (!props.post) return ""
+
   return (
     <div>
       <Card className={classes.root}>
@@ -59,12 +61,8 @@ const Post = props => {
           title={props.post.author}
         />
 
-        {/* <CardContent>
-          {props.post && props.post.location ? props.post.location.name ? props.post.location.name : "Местоположение не указано" : "Местоположение не указано"}
-        </CardContent> */}
-
         <CardContent>
-          {props.post.description.length > 0 ? `Описание: ${props.post.description}` : "Описание отсутствует"}
+          {props.post && props.post.description && props.post.description.length > 0 ? `Описание: ${props.post.description}` : "Описание отсутствует"}
         </CardContent>
 
         <CardContent>

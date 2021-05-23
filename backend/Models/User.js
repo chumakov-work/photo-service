@@ -5,7 +5,8 @@ const UserSchema = new mongoose.Schema({
   name: {type: String, required: true},
   password: {type: String, required: true},
   liked: {type: Array, default: null},
-  isAdmin: {type: Boolean, default: false}
+  isAdmin: {type: Boolean, default: false},
+  posts: {type: Array, default: []}
 }, {timestamps: true})
 
 module.exports = mongoose.model('User', UserSchema)
