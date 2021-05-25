@@ -39,3 +39,8 @@ form h6 {
 .liked {
     width: 350px;
 }
+
+.likesButton {
+    display: flex;
+    justify-content: flex-end;
+}
