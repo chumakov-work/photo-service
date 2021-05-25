@@ -32,7 +32,8 @@ const HomePage = props => {
       </section>
 
       <div id="map">
-        <GoogleMap/>
+        {!filterText && <GoogleMap/>}
+        {filterText && <GoogleMap filteredPosts={filteredPosts}/>}
       </div>
 
       <section id="main-page">

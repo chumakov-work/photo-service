@@ -22,15 +22,3 @@ code {
 #profilePage {
   padding: 15px 35px;
 }
-
-#somePost {
-  width: min-content;
-  margin: 50px auto;
-}
-
-#singlePostPage {
-  width: 350px;
-  margin: 15px auto;
-  padding: 25px;
-  background: rgba(0, 0, 0, .025);
-}
