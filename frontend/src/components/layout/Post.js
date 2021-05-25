@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from "react-redux"
+import {Link} from 'react-router-dom'
 import {likePost, verifyPost, deletePost} from "../../redux/actions"
 import { makeStyles } from '@material-ui/core/styles'
 import {Card, CardContent, CardHeader, CardMedia, Button, Chip} from "@material-ui/core"
@@ -55,11 +56,15 @@ const Post = props => {
           title={`Автор ${props.post.author}`}
         />
 
-        <CardMedia
-          className={classes.media}
-          image={props.post.imagePath}
-          title={props.post.author}
-        />
+        <CardContent>
+          <Link to={`/post/${props.post._id}`}>
+            <CardMedia
+              className={classes.media}
+              image={props.post.imagePath}
+              title={props.post.author}
+            />
+          </Link>
+        </CardContent>
 
         <CardContent>
           {props.post && props.post.description && props.post.description.length > 0 ? `Описание: ${props.post.description}` : "Описание отсутствует"}

@@ -15,7 +15,6 @@ const HomePage = props => {
     changeFilterText(text)
     const posts = []
 
-    // posts.map(post => console.log(post))
     props.posts.map(post => post.tags.map(tag => tag.includes(filterText) && posts.push(post)))
 
     if (posts.length < 1) {
@@ -32,20 +31,20 @@ const HomePage = props => {
         <input id="filteringInput" type="text" value={filterText} placeholder="Начниете печатать название" onChange={event => filterPosts(event.target.value)}/>
       </section>
 
+      <div id="map">
+        <GoogleMap/>
+      </div>
+
       <section id="main-page">
-        {!filterText && <div id="newest-posts" style={{margin: '50px'}}>
-          <h4>Самые новые</h4>
-          {props.posts && props.posts.map(post => <Post post={post} unverified={false}/>)}
+        {!filterText && <div>
+          <h4>Популярные</h4>
+          <div id="newest-posts">{props.posts && props.posts.map(post => <Post post={post} unverified={false}/>)}</div>
         </div>}
 
-        {filterText && <div id="newest-posts" style={{margin: '50px'}}>
-          <h4>Результаты поиска</h4>
-          {filteredPosts !== null ? filteredPosts.map(post => <Post post={post} unverified={false}/>) : <p>Ничего не найдено</p>}
+        {filterText && <div>
+          <h4>Результаты</h4>
+          <div id="newest-posts">{filteredPosts !== null ? filteredPosts.map(post => <Post post={post} unverified={false}/>) : <p>Ничего не найдено</p>}</div>
         </div>}
-
-        <div id="map">
-          <GoogleMap/>
-        </div>
       </section>
     </main>
   )
