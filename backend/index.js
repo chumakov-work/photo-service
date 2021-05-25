@@ -38,7 +38,7 @@ app.get('/post/verify/:id', verification, postRoutes.verifyPost)
 app.get('/like/:id', verification, postRoutes.likePost)
 
 // Starting a server
-const port = 5000
+const port = 5001
 app.listen(port, () => {
   console.log(`Server listening on port: ${port}`)
 })

@@ -34,6 +34,15 @@ const PickPlaceGoogleMap = props => {
                 google={props.google}
                 style={mapStyles}
                 zoom={16}
+                zoom={14}
+                styles={[
+                    {"elementType": "labels.icon", "stylers": [{
+                        "visibility": "off"
+                    }]}
+                ]}
+                streetViewControl={false}
+                mapTypeControl={false}
+                fullscreenControl={false}
                 onClick={mapClicked}
                 initialCenter={{
                     lat: 55.7305685,

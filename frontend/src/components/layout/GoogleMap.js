@@ -10,15 +10,32 @@ const GoogleMap = props => {
             position: {lat: post.location.lat, lng: post.location.lng},
             post
         }))
-    } 
+    }
+
+    const containerStyle = {
+        width: '60%', 
+        height: '500px'
+    }
+
+    if (window.innerWidth <= 768) {
+        containerStyle.width = '100%'
+    }
 
     return (
-        <div>
+        <div style={window.innerWidth <= 768 ? {width: '100%', height: '90%', margin: '0 auto'} : {width: '60%', height: '90%', margin: '0 auto'}}>
             <Map
                 scrollwheel={false}
                 google={props.google}
-                zoom={16}
-                containerStyle={{width: '60%', height: '90%', position: 'absolute'}}
+                zoom={14}
+                styles={[
+                    {"elementType": "labels.icon", "stylers": [{
+                        "visibility": "off"
+                    }]}
+                ]}
+                streetViewControl={false}
+                mapTypeControl={false}
+                fullscreenControl={false}
+                containerStyle={containerStyle}
                 initialCenter={{
                     lat: 55.7305685,
                     lng: 52.38928850000001

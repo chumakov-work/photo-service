@@ -9,10 +9,10 @@ const Admin = props => {
     if (!props.posts) props.getUnverifiedPosts()
 
     return (
-        <main id="main-page">
-            <div id="newest-posts" style={{margin: '50px'}}>
-                <h4>Ожидают модерации</h4>
-                {props.posts && props.posts.map(post => <Post post={post} unverified={true}/>)}
+        <main id="admin-page">
+            <div>
+                <h4 style={{margin: '50px'}}>Ожидают модерации</h4>
+                <div style={{margin: '50px'}}>{props.posts && props.posts.map(post => <Post post={post} unverified={true}/>)}</div>
             </div>
         </main>
     )

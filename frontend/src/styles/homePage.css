@@ -1,9 +1,19 @@
 #main-page {
-    display: flex;
+    margin-top: 550px;
+    width: 100%;
+    text-align: center;
+}
+
+#admin-page {
+    margin: 0;
 }
 
 #newest-posts {
-    width: 350px;
+    width: 70%;
+    margin: 25px auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 #map {
@@ -27,6 +37,15 @@
     color: rgba(0, 0, 0, .5);
 }
 
-#homePage {
-    /* width: 100vw; */
+@media screen and (max-width: 768px) {
+    #newest-posts {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #filteringInput {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
