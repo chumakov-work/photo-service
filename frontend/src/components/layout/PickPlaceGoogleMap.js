@@ -33,8 +33,11 @@ const PickPlaceGoogleMap = props => {
                 scrollwheel={false}
                 google={props.google}
                 style={mapStyles}
+                containerStyle={{
+                    width: '60%', 
+                    height: '500px'
+                }}
                 zoom={16}
-                zoom={14}
                 styles={[
                     {"elementType": "labels.icon", "stylers": [{
                         "visibility": "off"

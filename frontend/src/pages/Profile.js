@@ -9,6 +9,7 @@ import {newPostAction, someUserAction} from "../redux/actions"
 import Post from './../components/layout/Post'
 import './../styles/profile.css'
 import PickPlaceGoogleMap from './../components/layout/PickPlaceGoogleMap'
+import ProfileSlides from './../components/layout/ProfileSlides'
 
 const Profile = props => {
   const useStyles = makeStyles({
@@ -72,8 +73,9 @@ const Profile = props => {
       <form onSubmit={createPost} encType="multipart/form-data">
         <h5>Создать новый пост</h5>
 
-        <div className="form">
-          <div className="form-container">
+        <div className="form" style={{display: 'flex'}}>
+          <div>
+            <div className="form-container">
               <h6>Загрузите изображение</h6>
               <Input type="file" name="post" accept=".jpg, .jpeg, .png" className={classes.input} onChange={e => changeImage(e.target.files[0])}/>
             </div>
@@ -96,25 +98,19 @@ const Profile = props => {
                 <input type="submit" value="+" className="tagSubmitBtn" onClick={addTagToPost}/>
               </div>
             </div>
+          </div>
           
-          <div className="form-container location-input">
+          <div className="form-container location-input" style={{marginLeft: '50px'}}>
             <h6>Укажите локацию</h6>
             <PickPlaceGoogleMap changeCoords={changeCoords.bind(this)} />
           </div>
-
-          <div className="submitBtn"><Button variant="outlined" color="primary" onClick={createPost}>Создать пост</Button></div>
         </div>
+
+        <div className="submitBtn"><Button variant="outlined" color="primary" onClick={createPost}>Создать пост</Button></div>
       </form>
 
-      <div className="liked">
-        <p className="title">Понравившиеся</p>
-        {props.user.liked && props.user.liked.map(post => <Post post={post} fromProfile={true}/>)}
-      </div>
+      <ProfileSlides myPosts={props.user.posts && props.user.posts.length > 0 && props.user.posts} likedPosts={props.user.liked && props.user.liked}/>
 
-      <div className="liked">
-        <h3 className="title">Мои Посты</h3>
-        {props.user.posts && props.user.posts.length > 0 ? props.user.posts.map(post => <Post post={post} unverified={false}/>): "Постов нет"}
-      </div>
     </main>
   )
 }
