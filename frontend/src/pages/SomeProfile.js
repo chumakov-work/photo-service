@@ -3,9 +3,9 @@ import {withRouter} from 'react-router-dom'
 import {connect} from "react-redux"
 
 import {someUserAction} from "../redux/actions"
-import ProfileSlied from './../components/layout/ProfileSlides'
 import './../styles/profile.css'
 import {compose} from 'redux';
+import MyPosts from './../components/layout/MyPosts'
 
 const Profile = props => {
   useEffect(() => {
@@ -23,7 +23,7 @@ const Profile = props => {
           <p>Логин: {props.user.login}</p>
       </div>
 
-      <ProfileSlied myPosts={props.user.posts && props.user.posts.length > 0 && props.user.posts} likedPosts={props.user.liked && props.user.liked} />
+      <MyPosts posts={props.user.posts && props.user.posts.length > 0 && props.user.posts}/>
     </main>
   )
 }

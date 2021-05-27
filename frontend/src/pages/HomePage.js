@@ -3,9 +3,9 @@ import {connect} from "react-redux"
 import {getVerifiedPosts} from "../redux/actions"
 import Post from "../components/layout/Post"
 import GoogleMap from './../components/layout/GoogleMap'
+import ProfileSlides from './../components/layout/ProfileSlides'
 
 import "./../styles/homePage.css"
-import { Typography } from '@material-ui/core'
 
 const HomePage = props => {
   const [filterText, changeFilterText] = useState("")
@@ -43,15 +43,14 @@ const HomePage = props => {
       </div>
 
       <section id="main-page">
-        {!filterText && <div>
-          <h4>Популярные</h4>
-          <div id="newest-posts">{props.posts && props.posts.map(post => <Post post={post} unverified={false}/>)}</div>
-        </div>}
-
         {filterText && <div>
           <h4>Результаты</h4>
           <div id="newest-posts">{filteredPosts !== null ? filteredPosts.map(post => <Post post={post} unverified={false}/>) : <p>Ничего не найдено</p>}</div>
         </div>}
+
+        <div style={{width: '80%', margin: '0 auto'}}>
+          <ProfileSlides myPosts={props.posts && props.posts} likedPosts={props.posts && props.posts} from={'home'}/>
+        </div>
       </section>
     </main>
   )

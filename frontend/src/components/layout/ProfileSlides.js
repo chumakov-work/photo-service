@@ -53,6 +53,14 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [topPosts, updateTopPosts] = React.useState(null)
+
+  if (!topPosts && props.myPosts) {
+    const updatedPosts = [...props.myPosts]
+    updatedPosts.sort((a, b) => a.likes - b.likes).reverse()
+
+    updateTopPosts(updatedPosts)
+  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -61,17 +69,31 @@ export default function SimpleTabs(props) {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Посты" {...a11yProps(0)} />
-          <Tab label="Сохраненные" {...a11yProps(1)} />
-        </Tabs>
+        {props.from === 'home' ? <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tab label="Новые" {...a11yProps(0)} />
+          <Tab label="Популярные" {...a11yProps(1)} />
+        </Tabs> : <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tab label="Посты" {...a11yProps(2)} />
+          <Tab label="Сохраненные" {...a11yProps(3)} />
+        </Tabs>}
       </AppBar>
+
       <TabPanel value={value} index={0}>
         <MyPosts posts={props.myPosts}/>
       </TabPanel>
+
       <TabPanel value={value} index={1}>
+        <MyPosts posts={topPosts}/>
+      </TabPanel>
+
+      <TabPanel value={value} index={2}>
+        <MyPosts posts={props.myPosts}/>
+      </TabPanel>
+
+      <TabPanel value={value} index={3}>
         <MyLikedPosts posts={props.likedPosts}/>
       </TabPanel>
+
     </div>
   );
 }
