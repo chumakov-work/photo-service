@@ -8,7 +8,7 @@ const getCurrentUser = async (req, res) => {
     const login = jsonwebtoken.verify(token, "secret-key").login
 
     await UserModel.findOne({login}).then(async userData => {
-      if (userData.posts) {
+      if (userData && userData.posts) {
         const posts = []
         userData.posts.map(async id => await PostModel.findById(id).then(post => posts.push(post)))
         

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from "react-redux"
 import {Link} from 'react-router-dom'
-import {likePost, verifyPost, deletePost} from "../../redux/actions"
+import {likePost, verifyPost, deletePost, locateThePost} from "../../redux/actions"
 import { makeStyles } from '@material-ui/core/styles'
-import {Card, CardContent, CardHeader, CardMedia, Button, Chip} from "@material-ui/core"
+import {Card, CardContent, CardHeader, CardMedia, Button, Chip, Typography} from "@material-ui/core"
 import DeleteIcon from '@material-ui/icons/Delete'
 import SaveIcon from '@material-ui/icons/Save'
 
@@ -79,12 +79,18 @@ const Post = props => {
             <div className="likesButton">
             {liked ? 
               <Button variant="contained" color="secondary" disabled className={classes.button}>
-                Нравится
+                <Typography>Нравится</Typography>
               </Button> : 
               <Button variant="contained" color="secondary" onClick={likeSomePost} className={classes.button}>
-                Нравится
+                <Typography>Нравится</Typography>
               </Button>
             }
+
+              <Button variant="contained" color="secondary" onClick={() => props.locateThePost({lat: props.post.location.lat, lng: props.post.location.lng})} className={classes.button}>
+                <Typography>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M18.364 17.364L12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill="#fff"/></svg>
+                </Typography>
+              </Button>
             </div>
           </div>}
 
@@ -124,4 +130,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {likePost, verifyPost, deletePost})(Post)
+export default connect(mapStateToProps, {likePost, verifyPost, deletePost, locateThePost})(Post)

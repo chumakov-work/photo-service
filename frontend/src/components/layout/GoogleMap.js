@@ -6,20 +6,8 @@ import {connect} from 'react-redux'
 const GoogleMap = props => {
     const [center, updateCenter] = useState(null)
 
-    // if (!center) {
-    //     updateCenter({
-    //         lat: 55.7305685,
-    //         lng: 52.38928850000001
-    //     })
-    // }
-
     const changeMapCenter = (mapProps, map) => {
         updateCenter({
-            lat: map.center.lat(),
-            lng: map.center.lng()
-        })
-
-        console.log({
             lat: map.center.lat(),
             lng: map.center.lng()
         })
@@ -61,11 +49,11 @@ const GoogleMap = props => {
                     }]}
                 ]}
 
-                initialCenter={{
+                initialCenter={props.center ? props.center : {
                     lat: 55.7305685,
                     lng: 52.38928850000001
                 }}
-                center={center}
+                center={props.center ? props.center : center}
             >
                 {props.filteredPosts && props.filteredPosts.map(point => <Marker
                     position={{lat: point.location.lat, lng: point.location.lng}}
@@ -88,11 +76,11 @@ const GoogleMap = props => {
                     }]}
                 ]}
 
-                initialCenter={{
+                initialCenter={props.center ? props.center : {
                     lat: 55.7305685,
                     lng: 52.38928850000001
                 }}
-                center={center}
+                center={props.center ? props.center : center}
             >
                 {props.posts && points && points.map(point => <Marker
                     position={point.position}
@@ -105,7 +93,8 @@ const GoogleMap = props => {
 
 const mapStateToProps = state => {
     return {
-        posts: state.posts
+        posts: state.posts,
+        center: state.postLocation
     }
 }
 

@@ -1,6 +1,6 @@
 import Api from './../../api/ApiClient'
 import {BACKEND_ADDR} from "../../Config"
-import {LIKE_POST, LOAD_POSTS, LOAD_UNVERIFIED_POSTS, DELETE_POST, VERIFY_POST, LOAD_SINGLE_POST} from "../types";
+import {LIKE_POST, LOAD_POSTS, LOAD_UNVERIFIED_POSTS, DELETE_POST, VERIFY_POST, LOAD_SINGLE_POST, LOCATE_THE_POST} from "../types";
 import { toast } from 'react-toastify';
 
 export const newPostAction = (description, image, coords, tags) => async dispatch => {
@@ -72,4 +72,8 @@ export const getSinglePost = id => async dispatch => {
   await Api.post.getSinglePost(id).then(res => {
     if (res) dispatch({type: LOAD_SINGLE_POST, payload: res.data})
   })
+}
+
+export const locateThePost = coords => async dispatch => {
+  if (coords) dispatch({type: LOCATE_THE_POST, payload: coords})
 }

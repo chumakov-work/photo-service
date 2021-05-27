@@ -47,29 +47,6 @@ const SomePost = props => {
           <Link to="/" className="backLink">Назад</Link>
 
           <div id="singlePostPage" style={{width: '80%', margin: '10% auto'}}>
-            {/* <img src={props.post.imagePath} width="350px" alt={props.post.imagePath}/>
-              <p>Автор: {props.post.author}</p>
-              <p>{props.post.description ? `Описание: ${props.post.description}` : 'Нет описания'}</p>
-
-              {props.loggedIn && !props.fromProfile && !props.unverified && <div>
-              <p>Понравилось <b>{props.post.likes}</b></p>
-              
-              <div className="likesButton">
-              {liked ? 
-                <Button variant="contained" color="secondary" disabled className={classes.button}>
-                  Нравится
-                </Button> : 
-                <Button variant="contained" color="secondary" onClick={likeSomePost} className={classes.button}>
-                  Нравится
-                </Button>
-              }
-              </div>
-            </div>}
-
-            <div style={{marginTop: '10px'}}>
-            {props.post && props.post.tags && props.post.tags.map(tag => 
-            <Chip size="small" label={tag} className={classes.chip}/>)}</div> */}
-
             <Card>
               <CardHeader title={<Link to={`/user/${props.post.author}`}>{props.post.author}</Link>}/>
 

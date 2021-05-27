@@ -5,6 +5,7 @@ import Post from "../components/layout/Post"
 import GoogleMap from './../components/layout/GoogleMap'
 
 import "./../styles/homePage.css"
+import { Typography } from '@material-ui/core'
 
 const HomePage = props => {
   const [filterText, changeFilterText] = useState("")
@@ -28,10 +29,15 @@ const HomePage = props => {
   return (
     <main id="homePage">
       <section>
+        <p style={{textAlign: 'center', margin: '15px 0'}}>Сервис обмена фотографиями</p>
+      </section>
+
+      <section>
         <input id="filteringInput" type="text" value={filterText} placeholder="Начниете печатать название" onChange={event => filterPosts(event.target.value)}/>
       </section>
 
       <div id="map">
+        {props.postLocation && <GoogleMap/>}
         {!filterText && <GoogleMap/>}
         {filterText && <GoogleMap filteredPosts={filteredPosts}/>}
       </div>
