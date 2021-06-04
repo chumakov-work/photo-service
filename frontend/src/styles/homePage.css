@@ -17,6 +17,10 @@
     text-align: left;
 }
 
+.postContainer {
+    max-width: 100%;
+}
+
 #map {
     margin-top: 15px;
     border-radius: 8px !important;

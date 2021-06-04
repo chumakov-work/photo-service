@@ -9,7 +9,7 @@ import SaveIcon from '@material-ui/icons/Save'
 
 const useStyles = makeStyles({
   root: {
-    width: 350,
+    width: 300,
     marginBottom: 25
   },
   media: {
@@ -51,7 +51,7 @@ const Post = props => {
 
   return (
     <div>
-      <Card className={classes.root}>
+      <Card className={classes.root} variant="outlined">
         <CardHeader
           title={`Автор ${props.post.author}`}
         />
@@ -78,15 +78,15 @@ const Post = props => {
             
             <div className="likesButton">
             {liked ? 
-              <Button variant="contained" color="secondary" disabled className={classes.button}>
+              <Button variant="contained" color="primary" disabled className={classes.button}>
                 <Typography>Нравится</Typography>
               </Button> : 
-              <Button variant="contained" color="secondary" onClick={likeSomePost} className={classes.button}>
+              <Button variant="contained" color="primary" onClick={likeSomePost} className={classes.button}>
                 <Typography>Нравится</Typography>
               </Button>
             }
 
-              <Button variant="contained" color="secondary" onClick={() => props.locateThePost({lat: props.post.location.lat, lng: props.post.location.lng})} className={classes.button}>
+              <Button variant="contained" color="primary" onClick={() => props.locateThePost({lat: props.post.location.lat, lng: props.post.location.lng})} className={classes.button}>
                 <Typography>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M18.364 17.364L12 23.728l-6.364-6.364a9 9 0 1 1 12.728 0zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill="#fff"/></svg>
                 </Typography>

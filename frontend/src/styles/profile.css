@@ -7,20 +7,22 @@
 }
 
 .submitBtn {
-    margin-top: 115px;
-    margin-bottom: 25px;
+    /*margin-top: 115px;*/
+    /*margin-bottom: 25px;*/
+    width: max-content;
+    margin: 115px auto 25px auto;
 }
 
 .tagSubmitBtn {
     padding: 10px;
     border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, .35);
+    border: 2px solid #4050B5;
     background: transparent;
     width: 35px;
     height: 35px;
     cursor: pointer;
 
-    color: rgba(0, 0, 0, .35);
+    color: #4050B5;
     font-weight: 800;
     margin-left: 10px;
 }

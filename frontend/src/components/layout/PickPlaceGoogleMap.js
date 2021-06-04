@@ -6,8 +6,10 @@ const PickPlaceGoogleMap = props => {
     const [currentCoords, changeCurrentCoords] = useState({})
 
     const mapStyles = {
-        width: '350px',
-        height: '350px'
+        width: '300px',
+        height: '300px',
+        border: '2px solid #4050B5',
+        borderRadius: '8px'
     }
 
     const mapClicked = (t, map, coord) => {
@@ -37,7 +39,7 @@ const PickPlaceGoogleMap = props => {
                     width: '60%', 
                     height: '500px'
                 }}
-                zoom={16}
+                zoom={12}
                 styles={[
                     {"elementType": "labels.icon", "stylers": [{
                         "visibility": "off"

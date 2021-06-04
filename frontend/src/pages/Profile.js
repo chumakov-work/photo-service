@@ -19,7 +19,7 @@ const Profile = props => {
       zIndex: 9999
     },
     input: {
-      width: '350px'
+      width: 300
     }
   })
 
@@ -71,9 +71,9 @@ const Profile = props => {
   return (
     <main id="profilePage">
       <form onSubmit={createPost} encType="multipart/form-data">
-        <h5>Создать новый пост</h5>
+        <h5 style={{textAlign: 'center'}}>Создать новый пост</h5>
 
-        <div className="form" style={{display: 'flex'}}>
+        <div className="form" style={{display: 'flex', justifyContent: "center"}}>
           <div>
             <div className="form-container">
               <h6>Загрузите изображение</h6>
@@ -99,7 +99,7 @@ const Profile = props => {
               </div>
             </div>
           </div>
-          
+
           <div className="form-container location-input" style={{marginLeft: '50px'}}>
             <h6>Укажите локацию</h6>
             <PickPlaceGoogleMap changeCoords={changeCoords.bind(this)} />

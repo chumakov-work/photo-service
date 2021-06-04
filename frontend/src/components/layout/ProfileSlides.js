@@ -67,7 +67,7 @@ export default function SimpleTabs(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{width: '100%'}}>
       <AppBar position="static">
         {props.from === 'home' ? <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Новые" {...a11yProps(0)} />
