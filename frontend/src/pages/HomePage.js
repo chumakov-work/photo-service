@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import {connect} from "react-redux"
 import {getVerifiedPosts} from "../redux/actions"
 import Post from "../components/layout/Post"
@@ -6,21 +6,41 @@ import GoogleMap from './../components/layout/GoogleMap'
 import ProfileSlides from './../components/layout/ProfileSlides'
 
 import "./../styles/homePage.css"
+import {MenuItem, TextField} from "@material-ui/core";
+import Select from "@material-ui/core/Select";
 
 const HomePage = props => {
   const [filterText, changeFilterText] = useState("")
   const [filteredPosts, changeFilteredPosts] = useState([])
+  const [category, updateCategory] = useState(null)
+
   if (!props.posts) props.getVerifiedPosts()
 
-  const filterPosts = text => {
+  const filterPosts = (text, categoryName) => {
     changeFilterText(text)
+    updateCategory(categoryName)
+
     const posts = []
 
-    props.posts.map(post => post.tags.map(tag => tag.includes(filterText) && posts.push(post)))
+    if (categoryName) {
+      // find by category
+      props.posts?.map(post => post.category === categoryName && posts.push(post))
 
-    if (posts.length < 1) {
+    } else if (text) {
+      // find by tags
+      props.posts?.map(post => post.tags.map(tag => tag.includes(text) && posts.push(post)))
+
+    } else if (categoryName && text) {
+      // find by category and tag
+      console.log('find by category and tag')
+      props.posts?.map(post => post.category === categoryName && post.tags.map(tag => tag.includes(text) && posts.push(post)))
+
+    } else {
+      // no results
+      console.log('no results')
       changeFilteredPosts(null)
       return
+
     }
 
     changeFilteredPosts(posts)
@@ -32,8 +52,31 @@ const HomePage = props => {
         <p style={{textAlign: 'center', margin: '15px 0'}}>Сервис обмена фотографиями</p>
       </section>
 
-      <section>
-        <input id="filteringInput" type="text" value={filterText} placeholder="Начниете печатать название" onChange={event => filterPosts(event.target.value)}/>
+      <section className="searchBox">
+        <TextField
+          id="outlined-basic"
+          label="Начниете печатать название"
+          style={{width: '50%'}}
+          value={filterText}
+          onChange={event => filterPosts(event.target.value, category)}
+        />
+
+        <Select
+          labelId="category-label"
+          id="category"
+          value={category}
+          onChange={event => {
+            filterPosts(filterText, event.target.value)
+          }}
+          displayEmpty
+          inputProps={{'aria-label': 'Without label'}}
+        >
+          <MenuItem value={null}>Без категории</MenuItem>
+          <MenuItem value={"Животные"}>Животные</MenuItem>
+          <MenuItem value={"Архитектура"}>Архитектура</MenuItem>
+          <MenuItem value={"Люди"}>Люди</MenuItem>
+          <MenuItem value={"Политика"}>Политика</MenuItem>
+        </Select>
       </section>
 
       <div id="map">
@@ -43,9 +86,11 @@ const HomePage = props => {
       </div>
 
       <section id="main-page">
-        {filterText && <div>
+        {(filterText || category) && <div>
           <h4>Результаты</h4>
-          <div id="newest-posts">{filteredPosts !== null ? filteredPosts.map(post => <Post post={post} unverified={false}/>) : <p>Ничего не найдено</p>}</div>
+          <div id="newest-posts">{filteredPosts !== null ? filteredPosts.map(post => <Post post={post}
+                                                                                           unverified={false}/>) :
+            <p>Ничего не найдено</p>}</div>
         </div>}
 
         <div style={{width: '80%', margin: '0 auto'}}>

@@ -57,7 +57,7 @@ export default function SimpleTabs(props) {
 
   if (!topPosts && props.myPosts) {
     const updatedPosts = [...props.myPosts]
-    updatedPosts.sort((a, b) => a.likes - b.likes).reverse()
+    updatedPosts.sort((a, b) => a?.likes - b?.likes).reverse()
 
     updateTopPosts(updatedPosts)
   }

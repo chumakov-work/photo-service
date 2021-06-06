@@ -22,3 +22,8 @@ code {
 #profilePage {
   padding: 15px 35px;
 }
+
+.searchBox {
+  display: flex;
+  justify-content: center;
+}

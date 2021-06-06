@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Redirect} from 'react-router-dom'
 import {connect} from "react-redux"
-import {Input, Button, Chip} from '@material-ui/core';
+import {Input, Button, Chip, MenuItem} from '@material-ui/core';
 import {toast} from "react-toastify"
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 import {newPostAction, someUserAction} from "../redux/actions"
-import Post from './../components/layout/Post'
+import Select from '@material-ui/core/Select';
 import './../styles/profile.css'
 import PickPlaceGoogleMap from './../components/layout/PickPlaceGoogleMap'
 import ProfileSlides from './../components/layout/ProfileSlides'
@@ -31,6 +31,7 @@ const Profile = props => {
   const [coords, changeCoords] = useState("")
   const [chips, changeChips] = useState([])
   const [tagName, changeTagName] = useState("")
+  const [category, updateCategory] = useState("")
 
   if (!props.user) return <p>loading</p>
 
@@ -44,13 +45,14 @@ const Profile = props => {
 
     const formData = new FormData()
     formData.append('post', image, image.name)
-    props.newPostAction(description, formData, coords, chips)
+    props.newPostAction(description, formData, coords, chips, category)
 
     changeDescription("")
     changeImage(null)
     changeCoords("")
     changeChips([])
     changeTagName("")
+    updateCategory("")
   }
 
   const addTagToPost = event => {
@@ -66,7 +68,7 @@ const Profile = props => {
     }
   }
 
-  if (props.user.isAdmin) return <Redirect to="/admin" />
+  if (props.user.isAdmin) return <Redirect to="/admin"/>
 
   return (
     <main id="profilePage">
@@ -77,12 +79,14 @@ const Profile = props => {
           <div>
             <div className="form-container">
               <h6>Загрузите изображение</h6>
-              <Input type="file" name="post" accept=".jpg, .jpeg, .png" className={classes.input} onChange={e => changeImage(e.target.files[0])}/>
+              <Input type="file" name="post" accept=".jpg, .jpeg, .png" className={classes.input}
+                     onChange={e => changeImage(e.target.files[0])}/>
             </div>
 
             <div className="form-container">
               <h6>Добавьте описание</h6>
-              <Input value={description} className={classes.input} placeholder="Описание" onChange={e => changeDescription(e.target.value)}/>
+              <Input value={description} className={classes.input} placeholder="Описание"
+                     onChange={e => changeDescription(e.target.value)}/>
             </div>
 
             <div className="chip-container">
@@ -94,22 +98,44 @@ const Profile = props => {
               <h6>Укажите тэги</h6>
 
               <div className="tags-container">
-                <Input value={tagName} className={classes.input} placeholder="Текст тэга" onChange={e => changeTagName(e.target.value)}/>
+                <Input value={tagName} className={classes.input} placeholder="Текст тэга"
+                       onChange={e => changeTagName(e.target.value)}/>
                 <input type="submit" value="+" className="tagSubmitBtn" onClick={addTagToPost}/>
               </div>
+            </div>
+
+            <div className="form-container desc-container">
+              <h6>Выберите категорию</h6>
+
+              <Select
+                labelId="category-label"
+                id="category"
+                value={category}
+                onChange={e => updateCategory(e.target.value)}
+                displayEmpty
+                inputProps={{'aria-label': 'Without label'}}
+              >
+                <MenuItem value="" disabled>Категория</MenuItem>
+                <MenuItem value={"Животные"}>Животные</MenuItem>
+                <MenuItem value={"Архитектура"}>Архитектура</MenuItem>
+                <MenuItem value={"Люди"}>Люди</MenuItem>
+                <MenuItem value={"Политика"}>Политика</MenuItem>
+              </Select>
             </div>
           </div>
 
           <div className="form-container location-input" style={{marginLeft: '50px'}}>
             <h6>Укажите локацию</h6>
-            <PickPlaceGoogleMap changeCoords={changeCoords.bind(this)} />
+            <PickPlaceGoogleMap changeCoords={changeCoords.bind(this)}/>
           </div>
         </div>
 
-        <div className="submitBtn"><Button variant="outlined" color="primary" onClick={createPost}>Создать пост</Button></div>
+        <div className="submitBtn"><Button variant="outlined" color="primary" onClick={createPost}>Создать пост</Button>
+        </div>
       </form>
 
-      <ProfileSlides myPosts={props.user.posts && props.user.posts.length > 0 && props.user.posts} likedPosts={props.user.liked && props.user.liked}/>
+      <ProfileSlides myPosts={props.user.posts && props.user.posts.length > 0 && props.user.posts}
+                     likedPosts={props.user.liked && props.user.liked}/>
 
     </main>
   )

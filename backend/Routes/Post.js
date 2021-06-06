@@ -17,9 +17,15 @@ const uploadPostImage = async (req, res, upload) => {
 const getPostImage = async (req, res) => {
   const path = req.params.path
 
-  const img = fs.readFileSync('images/' + path);
-  res.writeHead(200, {'Content-Type': 'image/png' });
-  res.end(img, 'binary');
+  if (fs.existsSync(`images/${path}`)) {
+    const img = fs.readFileSync(`images/${path}`);
+    res.writeHead(200, {'Content-Type': 'image/png' });
+    res.end(img, 'binary');
+  } else {
+    const img = fs.readFileSync('images/placeholder.png');
+    res.writeHead(200, {'Content-Type': 'image/png' });
+    res.end(img, 'binary');
+  }
 }
 
 // POSTS
