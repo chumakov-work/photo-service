@@ -6,7 +6,8 @@ const connect = () => {
   const dbOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: true
   }
 
   const _URL = `mongodb+srv://admin:admin@cluster0.nczvf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
