@@ -69,13 +69,10 @@ export default function SimpleTabs(props) {
   return (
     <div className={classes.root} style={{width: '100%'}}>
       <AppBar position="static">
-        {props.from === 'home' ? <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Новые" {...a11yProps(0)} />
-          <Tab label="Популярные" {...a11yProps(1)} />
-        </Tabs> : <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Посты" {...a11yProps(2)} />
-          <Tab label="Сохраненные" {...a11yProps(3)} />
-        </Tabs>}
+        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tab label="Посты" {...a11yProps(0)} />
+          <Tab label="Сохраненные" {...a11yProps(1)} />
+        </Tabs>
       </AppBar>
 
       <TabPanel value={value} index={0}>
@@ -83,14 +80,6 @@ export default function SimpleTabs(props) {
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <MyPosts posts={topPosts}/>
-      </TabPanel>
-
-      <TabPanel value={value} index={2}>
-        <MyPosts posts={props.myPosts}/>
-      </TabPanel>
-
-      <TabPanel value={value} index={3}>
         <MyLikedPosts posts={props.likedPosts}/>
       </TabPanel>
 

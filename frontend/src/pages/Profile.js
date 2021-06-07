@@ -134,6 +134,8 @@ const Profile = props => {
         </div>
       </form>
 
+      {console.log(props)}
+
       <ProfileSlides myPosts={props.user.posts && props.user.posts.length > 0 && props.user.posts}
                      likedPosts={props.user.liked && props.user.liked}/>
 
