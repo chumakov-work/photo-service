@@ -90,19 +90,19 @@ export default function SimpleTabs(props) {
 
       {/* category slides*/}
       <TabPanel value={value} index={2}>
-        <MyPosts posts={props.posts.filter(post => post.category === "Животные")}/>
+        <MyPosts posts={props.posts?.filter(post => post.category === "Животные")}/>
       </TabPanel>
 
       <TabPanel value={value} index={3}>
-        <MyPosts posts={props.posts.filter(post => post.category === "Архитектура")}/>
+        <MyPosts posts={props.posts?.filter(post => post.category === "Архитектура")}/>
       </TabPanel>
 
       <TabPanel value={value} index={4}>
-        <MyPosts posts={props.posts.filter(post => post.category === "Люди")}/>
+        <MyPosts posts={props.posts?.filter(post => post.category === "Люди")}/>
       </TabPanel>
 
       <TabPanel value={value} index={5}>
-        <MyPosts posts={props.posts.filter(post => post.category === "Политика")}/>
+        <MyPosts posts={props.posts?.filter(post => post.category === "Политика")}/>
       </TabPanel>
     </div>
   );

@@ -57,23 +57,6 @@ const HomePage = props => {
           value={filterText}
           onChange={event => filterPosts(event.target.value, category)}
         />
-
-        {/*<Select*/}
-        {/*  labelId="category-label"*/}
-        {/*  id="category"*/}
-        {/*  value={category}*/}
-        {/*  onChange={event => {*/}
-        {/*    filterPosts(filterText, event.target.value)*/}
-        {/*  }}*/}
-        {/*  displayEmpty*/}
-        {/*  inputProps={{'aria-label': 'Without label'}}*/}
-        {/*>*/}
-        {/*  <MenuItem value={null}>Без категории</MenuItem>*/}
-        {/*  <MenuItem value={"Животные"}>Животные</MenuItem>*/}
-        {/*  <MenuItem value={"Архитектура"}>Архитектура</MenuItem>*/}
-        {/*  <MenuItem value={"Люди"}>Люди</MenuItem>*/}
-        {/*  <MenuItem value={"Политика"}>Политика</MenuItem>*/}
-        {/*</Select>*/}
       </section>
 
       <div id="map">
