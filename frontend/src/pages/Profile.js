@@ -119,7 +119,7 @@ const Profile = props => {
                 <MenuItem value={"Животные"}>Животные</MenuItem>
                 <MenuItem value={"Архитектура"}>Архитектура</MenuItem>
                 <MenuItem value={"Люди"}>Люди</MenuItem>
-                <MenuItem value={"Политика"}>Политика</MenuItem>
+                <MenuItem value={"Природа"}>Политика</MenuItem>
               </Select>
             </div>
           </div>

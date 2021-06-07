@@ -72,10 +72,8 @@ const Post = props => {
 
         <CardContent>
           {props.post && props.post.tags && props.post.tags.map(tag => <Chip size="small" label={tag} className={classes.chip}/>)}
-
+          <p>Понравилось <b>{props.post?.likes}</b> людям</p>
           {props.loggedIn && !props.fromProfile && !props.unverified && <div>
-            <p>Понравилось <b>{props.post.likes}</b> людям</p>
-            
             <div className="likesButton">
             {liked ? 
               <Button variant="contained" color="primary" disabled className={classes.button}>

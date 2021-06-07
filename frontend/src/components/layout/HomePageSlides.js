@@ -55,9 +55,9 @@ export default function SimpleTabs(props) {
   const [value, setValue] = React.useState(0);
   const [topPosts, updateTopPosts] = React.useState(null)
 
-  if (!topPosts && props.myPosts) {
-    const updatedPosts = [...props.myPosts]
-    updatedPosts.sort((a, b) => a?.likes - b?.likes).reverse()
+  if (!topPosts && props.posts) {
+    const updatedPosts = [...props.posts]
+    updatedPosts.sort((a, b) => a.likes && b.likes && a.likes - b.likes).reverse()
 
     updateTopPosts(updatedPosts)
   }
@@ -76,7 +76,7 @@ export default function SimpleTabs(props) {
           <Tab label="Животные" {...a11yProps(2)} />
           <Tab label="Архитектура" {...a11yProps(3)} />
           <Tab label="Люди" {...a11yProps(4)} />
-          <Tab label="Политика" {...a11yProps(5)} />
+          <Tab label="Природа" {...a11yProps(5)} />
         </Tabs>
       </AppBar>
 
@@ -85,7 +85,7 @@ export default function SimpleTabs(props) {
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <MyPosts posts={topPosts}/>
+        <MyPosts posts={topPosts?.filter(post => post.likes > 2)}/>
       </TabPanel>
 
       {/* category slides*/}
@@ -102,7 +102,7 @@ export default function SimpleTabs(props) {
       </TabPanel>
 
       <TabPanel value={value} index={5}>
-        <MyPosts posts={props.posts?.filter(post => post.category === "Политика")}/>
+        <MyPosts posts={props.posts?.filter(post => post.category === "Природа")}/>
       </TabPanel>
     </div>
   );

@@ -43,7 +43,7 @@ const SomePost = props => {
 
     if (!props.post) return <p>Загрузка...</p>
     return (
-        <main id="somePost">
+        <main id="somePost" style={{maxWidth: '450px', margin: '0 auto'}}>
           <Link to="/" className="backLink">Назад</Link>
 
           <div id="singlePostPage" style={{width: '80%', margin: '10% auto'}}>
