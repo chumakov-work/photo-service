@@ -3,11 +3,10 @@ import {connect} from "react-redux"
 import {getVerifiedPosts} from "../redux/actions"
 import Post from "../components/layout/Post"
 import GoogleMap from './../components/layout/GoogleMap'
-import ProfileSlides from './../components/layout/ProfileSlides'
+import HomePageSlides from './../components/layout/HomePageSlides'
 
 import "./../styles/homePage.css"
-import {MenuItem, TextField} from "@material-ui/core";
-import Select from "@material-ui/core/Select";
+import {TextField} from "@material-ui/core"
 
 const HomePage = props => {
   const [filterText, changeFilterText] = useState("")
@@ -32,12 +31,10 @@ const HomePage = props => {
 
     } else if (categoryName && text) {
       // find by category and tag
-      console.log('find by category and tag')
       props.posts?.map(post => post.category === categoryName && post.tags.map(tag => tag.includes(text) && posts.push(post)))
 
     } else {
       // no results
-      console.log('no results')
       changeFilteredPosts(null)
       return
 
@@ -61,22 +58,22 @@ const HomePage = props => {
           onChange={event => filterPosts(event.target.value, category)}
         />
 
-        <Select
-          labelId="category-label"
-          id="category"
-          value={category}
-          onChange={event => {
-            filterPosts(filterText, event.target.value)
-          }}
-          displayEmpty
-          inputProps={{'aria-label': 'Without label'}}
-        >
-          <MenuItem value={null}>Без категории</MenuItem>
-          <MenuItem value={"Животные"}>Животные</MenuItem>
-          <MenuItem value={"Архитектура"}>Архитектура</MenuItem>
-          <MenuItem value={"Люди"}>Люди</MenuItem>
-          <MenuItem value={"Политика"}>Политика</MenuItem>
-        </Select>
+        {/*<Select*/}
+        {/*  labelId="category-label"*/}
+        {/*  id="category"*/}
+        {/*  value={category}*/}
+        {/*  onChange={event => {*/}
+        {/*    filterPosts(filterText, event.target.value)*/}
+        {/*  }}*/}
+        {/*  displayEmpty*/}
+        {/*  inputProps={{'aria-label': 'Without label'}}*/}
+        {/*>*/}
+        {/*  <MenuItem value={null}>Без категории</MenuItem>*/}
+        {/*  <MenuItem value={"Животные"}>Животные</MenuItem>*/}
+        {/*  <MenuItem value={"Архитектура"}>Архитектура</MenuItem>*/}
+        {/*  <MenuItem value={"Люди"}>Люди</MenuItem>*/}
+        {/*  <MenuItem value={"Политика"}>Политика</MenuItem>*/}
+        {/*</Select>*/}
       </section>
 
       <div id="map">
@@ -94,7 +91,7 @@ const HomePage = props => {
         </div>}
 
         <div style={{width: '80%', margin: '0 auto'}}>
-          <ProfileSlides myPosts={props.posts && props.posts} likedPosts={props.posts && props.posts} from={'home'}/>
+          <HomePageSlides posts={props.posts && props.posts} likedPosts={props.posts && props.posts}/>
         </div>
       </section>
     </main>
