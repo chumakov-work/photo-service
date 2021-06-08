@@ -50,7 +50,7 @@ const Post = props => {
   if (!props.post) return ""
 
   return (
-    <div>
+    <div style={{margin: '5px'}}>
       <Card className={classes.root} variant="outlined">
         <CardHeader
           title={`Автор ${props.post.author}`}
