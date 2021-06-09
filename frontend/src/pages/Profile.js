@@ -43,6 +43,11 @@ const Profile = props => {
       return
     }
 
+    if (!category) {
+      toast.error("Выберите категорию")
+      return
+    }
+
     const formData = new FormData()
     formData.append('post', image, image.name)
     props.newPostAction(description, formData, coords, chips, category)
@@ -116,10 +121,15 @@ const Profile = props => {
                 inputProps={{'aria-label': 'Without label'}}
               >
                 <MenuItem value="" disabled>Категория</MenuItem>
-                <MenuItem value={"Животные"}>Животные</MenuItem>
-                <MenuItem value={"Архитектура"}>Архитектура</MenuItem>
                 <MenuItem value={"Люди"}>Люди</MenuItem>
-                <MenuItem value={"Природа"}>Политика</MenuItem>
+                <MenuItem value={"Природа"}>Природа</MenuItem>
+                <MenuItem value={"Животные"}>Животные</MenuItem>
+                <MenuItem value={"Еда"}>Еда</MenuItem>
+                <MenuItem value={"Одежда"}>Одежда</MenuItem>
+                <MenuItem value={"Эстетика"}>Эстетика</MenuItem>
+                <MenuItem value={"Развлечение"}>Развлечение</MenuItem>
+                <MenuItem value={"Арт"}>Арт</MenuItem>
+                <MenuItem value={"Живопись"}>Живопись</MenuItem>
               </Select>
             </div>
           </div>

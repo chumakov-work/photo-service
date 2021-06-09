@@ -72,11 +72,6 @@ export default function SimpleTabs(props) {
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Новые" {...a11yProps(0)} />
           <Tab label="Популярные" {...a11yProps(1)} />
-
-          <Tab label="Животные" {...a11yProps(2)} />
-          <Tab label="Архитектура" {...a11yProps(3)} />
-          <Tab label="Люди" {...a11yProps(4)} />
-          <Tab label="Природа" {...a11yProps(5)} />
         </Tabs>
       </AppBar>
 
@@ -86,23 +81,6 @@ export default function SimpleTabs(props) {
 
       <TabPanel value={value} index={1}>
         <MyPosts posts={topPosts?.filter(post => post.likes > 2)}/>
-      </TabPanel>
-
-      {/* category slides*/}
-      <TabPanel value={value} index={2}>
-        <MyPosts posts={props.posts?.filter(post => post.category === "Животные")}/>
-      </TabPanel>
-
-      <TabPanel value={value} index={3}>
-        <MyPosts posts={props.posts?.filter(post => post.category === "Архитектура")}/>
-      </TabPanel>
-
-      <TabPanel value={value} index={4}>
-        <MyPosts posts={props.posts?.filter(post => post.category === "Люди")}/>
-      </TabPanel>
-
-      <TabPanel value={value} index={5}>
-        <MyPosts posts={props.posts?.filter(post => post.category === "Природа")}/>
       </TabPanel>
     </div>
   );

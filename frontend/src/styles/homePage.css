@@ -9,10 +9,10 @@
 }
 
 #newest-posts {
-    width: 70%;
+    width: 75%;
     margin: 25px auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     text-align: left;
 }

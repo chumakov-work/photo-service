@@ -6,7 +6,7 @@ import GoogleMap from './../components/layout/GoogleMap'
 import HomePageSlides from './../components/layout/HomePageSlides'
 
 import "./../styles/homePage.css"
-import {TextField} from "@material-ui/core"
+import {MenuItem, Select, TextField} from "@material-ui/core"
 
 const HomePage = props => {
   const [filterText, changeFilterText] = useState("")
@@ -57,7 +57,40 @@ const HomePage = props => {
           value={filterText}
           onChange={event => filterPosts(event.target.value, category)}
         />
+
+        <Select
+          labelId="category-label"
+          id="category"
+          value={category}
+          onChange={event => {
+            filterPosts(filterText, event.target.value)
+          }}
+          displayEmpty
+          inputProps={{'aria-label': 'Without label'}}
+        >
+          <MenuItem value={null}>Без категории</MenuItem>
+          <MenuItem value={"Люди"}>Люди</MenuItem>
+          <MenuItem value={"Природа"}>Природа</MenuItem>
+          <MenuItem value={"Животные"}>Животные</MenuItem>
+          <MenuItem value={"Еда"}>Еда</MenuItem>
+          <MenuItem value={"Одежда"}>Одежда</MenuItem>
+          <MenuItem value={"Эстетика"}>Эстетика</MenuItem>
+          <MenuItem value={"Развлечение"}>Развлечение</MenuItem>
+          <MenuItem value={"Арт"}>Арт</MenuItem>
+          <MenuItem value={"Живопись"}>Живопись</MenuItem>
+        </Select>
       </section>
+
+      {/*архитектура
+люди
+природа
+животные
+еда
+одежда
+эстетика
+развлечение
+арт
+живопись*/}
 
       <div id="map">
         {props.postLocation && <GoogleMap/>}
